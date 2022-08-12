@@ -1,4 +1,4 @@
-# Frontend Lelang - Admin
+# Frontend Lelang - User
 
 ## By Roket BCA - BIT19
 
