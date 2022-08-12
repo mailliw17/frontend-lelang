@@ -1,0 +1,178 @@
+<app-navbar></app-navbar>
+<main class="main-content">
+  <!-- ======= Intro Single ======= -->
+  <section class="section-services section-t8 mb-3">
+    <div class="container">
+      <mat-card>
+        <h2>Filter Lot Lelang</h2>
+        <hr />
+        <div class="row">
+          <!-- for checkbox jenis lot lelang -->
+          <div class="col-md-4">
+            <label for="exampleInputPassword1">Jenis Lot Lelang</label>
+            <div class="form-group form-check m-1">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1">Rumah</label>
+            </div>
+            <div class="form-group form-check m-1">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1"
+                >Apartmen</label
+              >
+            </div>
+            <div class="form-group form-check m-1">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1">Ruko</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="sr-only" for="inlineFormInputGroup"
+              >Harga minimum</label
+            >
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Rp</div>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                id="inlineFormInputGroup"
+              />
+            </div>
+            <label class="sr-only" for="inlineFormInputGroup"
+              >Harga maximum</label
+            >
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Rp</div>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                id="inlineFormInputGroup"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Pilih Provinsi</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>DKI Jakarta</option>
+                <option>Jawa Barat</option>
+                <option>Jawa Tengah</option>
+              </select>
+            </div>
+
+            <div class="form-group mt-2">
+              <label for="exampleFormControlSelect1">Pilih Kota</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Jakarta Barat</option>
+                <option>Bogor</option>
+                <option>Semarang</option>
+              </select>
+            </div>
+
+            <div align="end" class="mt-2">
+              <button class="btn btn-primary">
+                <i class="bi bi-funnel"></i> Terapkan
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+  <!-- End Intro Single-->
+
+  <!-- ======= Property Grid ======= -->
+  <section class="property-grid grid">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="grid-option">
+            <!-- SORTING -->
+            <form>
+              <select class="custom-select">
+                <option selected>All</option>
+                <option value="1">New to Old</option>
+                <option value="2">For Rent</option>
+                <option value="3">For Sale</option>
+              </select>
+            </form>
+          </div>
+        </div>
+        <!-- INI MAU DI FOREACH -->
+        <div class="col-md-4" *ngFor="let dao of dataAuctionObject">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{ dao.imageURL1 }}" alt="" class="img-a img-fluid" />
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="#">{{ dao.name }}</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">
+                      <i class="bi bi-geo-alt"></i>
+                      {{ dao.organizer.name.substr(6) }} | Rp
+                      {{ dao.initialPrice | number: "1.2-2" }}</span
+                    >
+                  </div>
+                  <a routerLink="/lot-lelang/detail/{{ dao.id }}" class="link-a"
+                    >Detail
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <nav class="pagination-a">
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">
+                  <span class="bi bi-chevron-left"></span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">3</a>
+              </li>
+              <li class="page-item next">
+                <a class="page-link" href="#">
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End Property Grid Single-->
+<app-footer></app-footer>

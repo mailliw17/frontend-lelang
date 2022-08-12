@@ -1,0 +1,81 @@
+<mat-card>
+  <mat-card-title>Ganti Profil</mat-card-title>
+
+  <form action="">
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nama Depan</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="editUserForm.firstName"
+          name="firstName"
+        />
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi nama depan anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nama Belakang</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="editUserForm.lastName"
+          name="lastName"
+        />
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi nama belakang anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="editUserForm.email"
+          name="email"
+        />
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi email aktif anda untuk aktivasi</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nomor HP</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="editUserForm.phoneNum"
+          name="phoneNum"
+        />
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi nomor HP aktif anda</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Tanggal Lahir</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="editUserForm.dateOb"
+          name="dateOb"
+        />
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <mat-hint>Isi tanggal lahir anda sesuai KTP</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="updateUserData()">
+        <mat-icon>edit</mat-icon> Ganti Profil
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

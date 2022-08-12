@@ -1,0 +1,143 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <section class="section-services section-t8">
+    <h1>Konfirmasi Mengikuti Lelang</h1>
+    <hr />
+
+    <div class="row" *ngIf="isLoggedIn == false">
+      <div class="alert alert-danger text-white" role="alert">
+        Anda diharuskan login terlebih dahulu untuk mengikuti lelang ini.
+        <a routerLink="/login">Klik di sini</a> untuk login atau
+        <a routerLink="/register">klik di sini</a> untuk mendaftar.
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isLoggedIn">
+      <div class="col-md-5">
+        <table class="table table-striped example-full-width">
+          <tbody>
+            <tr>
+              <th scope="row">DATA LOT LELANG</th>
+            </tr>
+            <tr>
+              <th scope="row">Kode</th>
+              <td>{{ detailDataAuctionObject.lotCode }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Nama Lot Lelang</th>
+              <td>{{ detailDataAuctionObject.name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Uang Jaminan</th>
+              <td>
+                Rp
+                {{
+                  detailDataAuctionObject.collateralQuantity | number: "1.2-2"
+                }}
+              </td>
+            </tr>
+            <br />
+            <tr>
+              <th scope="row">DATA CALON PESERTA LELANG</th>
+            </tr>
+            <tr>
+              <th scope="row">Nama</th>
+              <td>{{ dataKtp.namaLengkap }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Keikutsertaan</th>
+              <td>Untuk diri sendiri</td>
+            </tr>
+            <br />
+            <tr>
+              <th scope="row">REKENING PENGEMBALIAN</th>
+            </tr>
+            <tr>
+              <th scope="row">Nama Bank</th>
+              <td>{{ dataRekening.bank }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Nomor Rekening</th>
+              <td>{{ dataRekening.accountNo }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Atas Nama</th>
+              <td>{{ dataRekening.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-5">
+        <table class="table table-striped example-full-width">
+          <tbody>
+            <tr>
+              <th scope="row">KARTU TANDA PENDUDUK (KTP)</th>
+            </tr>
+            <tr>
+              <th scope="row">NIK</th>
+              <td>{{ dataKtp.ktpNo }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Nama</th>
+              <td>{{ dataKtp.namaLengkap }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tempat & Tanggal Lahir</th>
+              <td>
+                {{ dataKtp.birthPlace }},
+                {{ dataKtp.birthDate | date: "dd-LLLL-yyyy" }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Alamat</th>
+              <td>{{ dataKtp.address }}</td>
+            </tr>
+
+            <br />
+            <tr>
+              <th scope="row">NOMOR POKOK WAJIB PAJAK (NPWP)</th>
+            </tr>
+            <tr>
+              <th scope="row">Nomor NPWP</th>
+              <td>{{ dataNpwp.npwpNo }}</td>
+            </tr>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <tr>
+              <th scope="row">
+                <mat-checkbox
+                  class="example-margin"
+                  [(ngModel)]="disabledButton"
+                  >Saya berkehendak untuk mengikuti lelang <br />
+                  serta telah membaca dan menyetujui <br />
+                  <a
+                    routerLink="/syarat-dan-ketentuan"
+                    target="_blank"
+                    class="garis-bawah"
+                    >Syarat dan Ketentuan</a
+                  >
+                  lelang ini
+                </mat-checkbox>
+              </th>
+              <td>
+                <button
+                  class="btn btn-primary"
+                  (click)="createVirtualAccount()"
+                  [disabled]="!disabledButton"
+                >
+                  <i class="bi bi-check2-square"> </i> Ikut Lelang
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

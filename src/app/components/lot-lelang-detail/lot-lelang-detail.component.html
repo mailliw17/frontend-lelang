@@ -1,0 +1,199 @@
+<app-navbar></app-navbar>
+<main class="">
+  <!-- ======= Intro Single ======= -->
+  <section class="section-services section-t8 mb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="card">
+            <div class="card-body shadow-lg p-3 bg-white rounded">
+              <h1 class="">{{ detailDataAuctionObject.name }}</h1>
+              <h1 class="">
+                Rp {{ detailDataAuctionObject.initialPrice | number: "1.2-2" }}
+              </h1>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-12 col-lg-4">
+                <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="property-grid.html">Properties</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Bangunan
+                        </li>
+                    </ol>
+                </nav>
+            </div> -->
+      </div>
+    </div>
+  </section>
+  <!-- End Intro Single-->
+
+  <!-- ======= Property Single ======= -->
+  <section class="property-single nav-arrow-b">
+    <div class="container">
+      <div class="row justify-content-center">
+        <!-- <div class="col-lg-4"> -->
+        <!-- carousel from coreui.io -->
+        <app-carousel-detail></app-carousel-detail>
+        <!-- </div> -->
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row justify-content-between">
+            <div class="col-md-4 col-lg-4">
+              <!-- <div class="property-price d-flex justify-content-center foo">
+                            <div class="card-header-c d-flex">
+                                <div class="card-box-ico">
+                                    <span class="">Rp</span>
+                                </div>
+                                <div class="card-title-c align-self-center">
+                                    <h5 class="title-c">15000</h5>
+                                </div>
+                            </div>
+                        </div> -->
+              <div class="property-summary">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="title-box-d section-t4">
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Cara Penawaran:</th>
+                            <td>{{ detailDataAuctionObject.bidMethod }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Jaminan:</th>
+                            <td>
+                              Rp{{
+                                detailDataAuctionObject.collateralQuantity
+                                  | number: "1.2-2"
+                              }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Batas Akhir Jaminan:</th>
+                            <td>
+                              {{
+                                detailDataAuctionObject.collateralExpire
+                                  | date: "dd-LLLL-yyyy"
+                              }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Waktu Mulai Lelang:</th>
+                            <td>
+                              {{
+                                detailDataAuctionObject.bidStart
+                                  | date: "dd-LLLL-yyyy H:m"
+                              }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Waktu Selesai Lelang</th>
+                            <td>
+                              {{
+                                detailDataAuctionObject.bidExpire
+                                  | date: "dd-LLLL-yyyy H:m"
+                              }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Penjual:</th>
+                            <td>{{ detailDataAuctionObject.seller?.name }}</td>
+                            <!-- ? is for declare than  detailDataAuctionObject.name and detailDataAuctionObject.organizer.name is different-->
+                          </tr>
+                          <tr>
+                            <th scope="row">Penyelenggara:</th>
+                            <td>
+                              {{ detailDataAuctionObject.organizer?.name }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Lampiran:</th>
+                            <td>
+                              <a
+                                href="{{ detailDataAuctionObject.attachment }}"
+                                target="_blank"
+                                ><i class="bi bi-file-earmark-pdf"></i> Klik
+                                disini untuk melihat lampiran</a
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- <h3 class="font-weight-bold">Nilai Limit :</h3>
+                      <li class="d-flex justify-content-between">
+                        <strong
+                          >Rp
+                          {{
+                            detailDataAuctionObject.initialPrice
+                              | number: "1.2-2"
+                          }}</strong
+                        >
+                      </li> -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="row">
+                  <p>
+                    <mat-button-toggle-group
+                      name="fontStyle"
+                      aria-label="Font Style"
+                    >
+                      <mat-button-toggle (click)="openDialogLampiran()"
+                        >Lampiran
+                      </mat-button-toggle>
+                      <mat-button-toggle (click)="openDialogInfoPenjual()"
+                        >Info Penjual
+                      </mat-button-toggle>
+                      <mat-button-toggle (click)="openDialogInfoPenyelenggara()"
+                        >Info Penyelenggara
+                      </mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </p>
+                </div> -->
+              </div>
+            </div>
+            <!-- <br> -->
+            <div class="col-md-8 section-md-t3">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="title-box-d section-t4">
+                    <h3 class="font-weight-bold">Uraian</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="property-description">
+                <p class="description color-text-a">
+                  {{ detailDataAuctionObject.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-3 text-center">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            routerLink="/lot-lelang/konfirmasi-ikut-lelang/{{
+              detailDataAuctionObject.id
+            }}"
+          >
+            <i class="bi bi-check2-square"> </i> Ikut Lelang
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End Property Single-->
+<app-footer></app-footer>

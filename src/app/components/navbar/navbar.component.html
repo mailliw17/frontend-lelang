@@ -1,0 +1,96 @@
+<!-- ======= Header/Navbar ======= -->
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+  <div class="container">
+    <button
+      class="navbar-toggler collapsed"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarDefault"
+      aria-controls="navbarDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a class="navbar-brand text-brand" routerLink="/"
+      >Roket BCA<span class="color-b"> Lelang</span></a
+    >
+
+    <div
+      class="navbar-collapse collapse justify-content-center"
+      id="navbarDefault"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lot-lelang">Lot Lelang</a>
+        </li>
+
+        <!-- <li class="nav-item">
+                    <a class="nav-link " href="property-grid.html">Property</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="blog-grid.html">Blog</a>
+                </li> -->
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Lainnya <i class="bi bi-chevron-down"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/syarat-dan-ketentuan"
+              >Syarat & Ketentuan</a
+            >
+            <a class="dropdown-item" routerLink="/faq"
+              >FAQ <i class="ni ni-air-baloon"></i
+            ></a>
+          </div>
+        </li>
+        <!-- <li class="nav-item">
+                    <a class="nav-link " href="contact.html">Contact</a>
+                </li> -->
+      </ul>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary navbar-toggle-box navbar-toggle-box-collapse m-1"
+      *ngIf="isLoggedIn == true"
+    >
+      <a routerLink="/status-lelang" class="text-white">
+        Selamat datang, {{ currentUser?.firstName }}
+        <i class="bi bi-person-badge"> </i>
+      </a>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-danger navbar-toggle-box navbar-toggle-box-collapse m-1"
+      *ngIf="isLoggedIn == true"
+    >
+      <a (click)="logout()"> <i class="bi bi-box-arrow-right"> </i> Keluar </a>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-primary navbar-toggle-box navbar-toggle-box-collapse m-1"
+      *ngIf="isLoggedIn == false"
+    >
+      <a routerLink="/login"> <i class="bi bi-box-arrow-right"> </i> Masuk </a>
+    </button>
+  </div>
+</nav>
+<!-- End Header/Navbar -->
