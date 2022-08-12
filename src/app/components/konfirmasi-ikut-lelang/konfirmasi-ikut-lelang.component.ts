@@ -69,10 +69,12 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
     const user = this.token.getUser();
     this.http.get<any>(GET_KTP_API + user.id, this.httpOptions_base).subscribe(
       (isi) => {
+        // console.log(isi);
         this.dataKtp = isi;
       },
       (err) => {
-        console.log(err);
+        this.dataKtp = 0;
+        // console.log(err);
       }
     );
   }
@@ -84,7 +86,8 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
         this.dataNpwp = isi;
       },
       (err) => {
-        console.log(err);
+        this.dataNpwp = 0;
+        // console.log(err);
       }
     );
   }
@@ -98,9 +101,11 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
           // console.log(isi[0]);
           // pakai index karena dari BE dikasih array bukan lgsg object
           this.dataRekening = isi[0];
+          // console.log(isi[0]);
         },
         (err) => {
-          console.log(err);
+          this.dataRekening = 0;
+          // console.log(err);
         }
       );
   }

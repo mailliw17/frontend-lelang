@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { RekeningService } from 'src/app/_services/rekening.service';
@@ -12,10 +16,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-main-profil-rekening-bank',
   templateUrl: './main-profil-rekening-bank.component.html',
-  styleUrls: ['./main-profil-rekening-bank.component.css']
+  styleUrls: ['./main-profil-rekening-bank.component.css'],
 })
 export class MainProfilRekeningBankComponent implements OnInit {
-
   dtOptions: DataTables.Settings = {};
   rekeningData!: Rekening[];
   dtTrigger: Subject<any> = new Subject<any>();
@@ -28,8 +31,8 @@ export class MainProfilRekeningBankComponent implements OnInit {
     private formBuilder: FormBuilder,
     private token: TokenStorageService,
     private router: Router,
-    private rekening: RekeningService,
-  ) { }
+    private rekening: RekeningService
+  ) {}
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -39,13 +42,16 @@ export class MainProfilRekeningBankComponent implements OnInit {
     this.rekening.getRekeningData(this.token.getUser().id).subscribe(
       (isi) => {
         this.rekeningData = isi;
-        if(isi.length > 0){
+        if (isi.length > 0) {
           this.isExist = true;
-        } else {
-          this.isExist = false;
         }
+        // elsxe {
+        //   this.isExist = false;
+        // }
         this.dtTrigger.next(this.rekeningData);
-      }, (err) => {
+      },
+      (err) => {
+        this.isExist = false;
         console.log(err);
       }
     );
@@ -53,7 +59,7 @@ export class MainProfilRekeningBankComponent implements OnInit {
     this.rekeningDataForm = this.formBuilder.group({
       bank: [''],
       accountNo: [''],
-      name: ['']
+      name: [''],
     });
   }
 
@@ -62,67 +68,77 @@ export class MainProfilRekeningBankComponent implements OnInit {
     this.rekeningDataForm.reset();
   }
 
-  openEditModal(i:any): void {
+  openEditModal(i: any): void {
     this.isEdit = true;
     this.index = i;
     this.rekeningDataForm.patchValue({
       bank: this.rekeningData[i].bank,
       accountNo: this.rekeningData[i].accountNo,
-      name: this.rekeningData[i].name
+      name: this.rekeningData[i].name,
     });
   }
 
-  deleteRekening(i:any): void {
+  deleteRekening(i: any): void {
     this.rekening.deleteRekeningData(this.rekeningData[i].id).subscribe(
       (isi) => {
         window.location.reload();
-      }, (err) => {
+      },
+      (err) => {
         console.log(err);
       }
     );
   }
 
   addRekening(): void {
-    if(this.rekeningDataForm.get('bank')!.value == 'BCA'){
-      this.rekening.getRekeningDataFromIds(this.rekeningDataForm.get('accountNo')!.value).subscribe(
-        (isi) => {
-          if(isi == null){
+    if (this.rekeningDataForm.get('bank')!.value == 'BCA') {
+      this.rekening
+        .getRekeningDataFromIds(this.rekeningDataForm.get('accountNo')!.value)
+        .subscribe(
+          (isi) => {
+            if (isi == null) {
+              Swal.fire({
+                title: 'Gagal',
+                text: 'Rekening tidak ditemukan',
+                icon: 'error',
+              });
+            } else {
+              this.rekening
+                .createRekeningData(this.rekeningDataForm.value)
+                .subscribe(
+                  (isi) => {
+                    window.location.reload();
+                  },
+                  (err) => {
+                    console.log(err);
+                  }
+                );
+            }
+          },
+          (err) => {
             Swal.fire({
               title: 'Gagal',
               text: 'Rekening tidak ditemukan',
-              icon: 'error'
+              icon: 'error',
             });
-          } else {
-            this.rekening.createRekeningData(this.rekeningDataForm.value).subscribe(
-              (isi) => {
-                window.location.reload();
-              }, (err) => {
-                console.log(err);
-              }
-            );
-        }
-    }, (err) => {
-      Swal.fire({
-        title: 'Gagal',
-        text: 'Rekening tidak ditemukan',
-        icon: 'error'
-      });
-      console.log(err);
+            console.log(err);
+          }
+        );
     }
-    );
   }
-}
 
   updateRekening(): void {
-    this.rekening.updateRekeningData(this.rekeningData[this.index].id, this.rekeningDataForm.value).subscribe(
-      (isi) => {
-        window.location.reload();
-      }, (err) => {
-        console.log(err);
-      }
-    );
+    this.rekening
+      .updateRekeningData(
+        this.rekeningData[this.index].id,
+        this.rekeningDataForm.value
+      )
+      .subscribe(
+        (isi) => {
+          window.location.reload();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
-
-
 }
-

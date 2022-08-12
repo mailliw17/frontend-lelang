@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const GET_ALL_API = 'http://10.1.137.220:8766/getAll';
+// for faster development
+const GET_ALL_API = 'http://10.1.137.220:8766/getAll?size=2';
 
 @Component({
   selector: 'app-lot-lelang',

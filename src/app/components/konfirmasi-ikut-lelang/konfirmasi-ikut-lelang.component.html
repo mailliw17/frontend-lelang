@@ -5,6 +5,7 @@
     <h1>Konfirmasi Mengikuti Lelang</h1>
     <hr />
 
+    <!-- ALERT BELUM LOGIN -->
     <div class="row" *ngIf="isLoggedIn == false">
       <div class="alert alert-danger text-white" role="alert">
         Anda diharuskan login terlebih dahulu untuk mengikuti lelang ini.
@@ -12,8 +13,53 @@
         <a routerLink="/register">klik di sini</a> untuk mendaftar.
       </div>
     </div>
+    <!-- EOF ALERT BELUM LOGIN -->
 
-    <div class="row" *ngIf="isLoggedIn">
+    <!-- ALERT BELUM UNGGAH BERKAS -->
+    <div class="row" *ngIf="dataKtp == 0">
+      <div class="alert alert-danger text-white" role="alert">
+        Anda belum belum menggunggah file KTP.
+        <a href="/profil/ktp">Klik di sini</a> untuk menambahkannya.
+      </div>
+    </div>
+
+    <div class="row" *ngIf="dataNpwp == 0">
+      <div class="alert alert-danger text-white" role="alert">
+        Anda belum belum menggunggah file NPWP.
+        <a href="/profil/npwp">Klik di sini</a> untuk menambahkannya.
+      </div>
+    </div>
+
+    <div class="row" *ngIf="dataRekening == 0">
+      <div class="alert alert-danger text-white" role="alert">
+        Anda belum belum menambahkan data rekening bank.
+        <a href="/profil/rekening-bank">Klik di sini</a> untuk menambahkannya.
+      </div>
+    </div>
+
+    <!-- EOF ALERT BELUM UNGGAH BERKAS -->
+    <div class="row" *ngIf="dataKtp.isApproved == false">
+      <div class="alert alert-warning text-white" role="alert">
+        KTP Anda sedang dalam masa verifikasi. Mohon menunggu
+      </div>
+    </div>
+
+    <div class="row" *ngIf="dataNpwp.isApproved == false">
+      <div class="alert alert-warning text-white" role="alert">
+        NPWP Anda sedang dalam masa verifikasi. Mohon menunggu
+      </div>
+    </div>
+    <!-- ALERT BERKAS BELUM TERVALIDASI -->
+
+    <div
+      class="row"
+      *ngIf="
+        isLoggedIn &&
+        dataKtp.isApproved == true &&
+        dataNpwp.isApproved == true &&
+        dataRekening
+      "
+    >
       <div class="col-md-5">
         <table class="table table-striped example-full-width">
           <tbody>
