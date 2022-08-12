@@ -20,6 +20,7 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
   isLoggedIn = false;
   detailDataAuctionObject: any = {};
   valueAuctionObject: any;
+  idAuctionObject: any;
   dataKtp: any = {};
   dataNpwp: any = {};
   dataRekening: any = {};
@@ -58,6 +59,7 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
         // console.log(isi);
         this.detailDataAuctionObject = isi;
         this.valueAuctionObject = isi.collateralQuantity;
+        this.idAuctionObject = isi.id;
       },
       (err) => {
         console.log(err);
@@ -113,6 +115,7 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
   createVirtualAccount() {
     const user = this.token.getUser();
     this.vaForm = {
+      auctionobjectId: this.idAuctionObject,
       userId: user.id,
       value: this.valueAuctionObject,
     };

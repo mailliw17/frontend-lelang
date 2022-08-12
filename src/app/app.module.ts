@@ -61,6 +61,7 @@ import { BiddingComponent } from './components/bidding/bidding.component';
 import { PengumumanBiddingComponent } from './components/pengumuman-bidding/pengumuman-bidding.component';
 import { CarouselDetailComponent } from './components/carousel-detail/carousel-detail.component';
 import { DataTablesModule } from 'angular-datatables';
+import { KonfirmasiPembayaranJaminanComponent } from './components/konfirmasi-pembayaran-jaminan/konfirmasi-pembayaran-jaminan.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { DataTablesModule } from 'angular-datatables';
     BiddingComponent,
     PengumumanBiddingComponent,
     CarouselDetailComponent,
+    KonfirmasiPembayaranJaminanComponent,
   ],
   imports: [
     BrowserModule,
