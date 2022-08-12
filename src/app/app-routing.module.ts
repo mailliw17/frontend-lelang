@@ -13,6 +13,7 @@ import { SyaratDanKetentuanComponent } from './components/syarat-dan-ketentuan/s
 import { FaqComponent } from './components/faq/faq.component';
 import { BiddingComponent } from './components/bidding/bidding.component';
 import { PengumumanBiddingComponent } from './components/pengumuman-bidding/pengumuman-bidding.component';
+import { KonfirmasiPembayaranJaminanComponent } from './components/konfirmasi-pembayaran-jaminan/konfirmasi-pembayaran-jaminan.component';
 
 const routes: Routes = [
   {
@@ -66,7 +67,7 @@ const routes: Routes = [
     component: ProfilComponent,
   },
   {
-    path: 'status-lelang/detail',
+    path: 'status-lelang/detail/:id',
     component: DetailStatusLelangComponent,
   },
   {
@@ -100,6 +101,10 @@ const routes: Routes = [
   {
     path: 'faq',
     component: FaqComponent,
+  },
+  {
+    path: 'konfirmasi-pembayaran-jaminan',
+    component: KonfirmasiPembayaranJaminanComponent,
   },
 ];
 

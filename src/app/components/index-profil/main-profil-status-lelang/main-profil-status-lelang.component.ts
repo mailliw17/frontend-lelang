@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const GET_VA_BY_ID_API = 'http://10.1.137.220:8772/getbyuserid/';
-const GET_AO_API = 'http://10.1.137.220:8766/get/';
 
 @Component({
   selector: 'app-main-profil-status-lelang',
@@ -13,6 +12,8 @@ const GET_AO_API = 'http://10.1.137.220:8766/get/';
 })
 export class MainProfilStatusLelangComponent implements OnInit {
   vaData: any = [];
+  aoData: any = [];
+  aoId: any[] = [];
 
   // token for get anything data
   httpOptions_base = {
@@ -30,35 +31,21 @@ export class MainProfilStatusLelangComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getDataVA();
+    this.getAllData();
   }
 
-  getDataVA() {
+  getAllData() {
     const user = this.token.getUser();
     this.http
       .get<any>(GET_VA_BY_ID_API + user.id, this.httpOptions_base)
       .subscribe(
         (isi) => {
-          // console.log(isi);
           this.vaData = isi;
+          // console.log(this.vaData);
         },
         (err) => {
           console.log(err);
         }
       );
   }
-
-  // getAOData() {
-  //   const id = String(this.route.snapshot.paramMap.get('id'));
-  //   this.http.get<any>(GET_AO_API + id).subscribe(
-  //     (isi) => {
-  //       // console.log(isi);
-  //       this.detailDataAuctionObject = isi;
-  //       this.valueAuctionObject = isi.collateralQuantity;
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
 }

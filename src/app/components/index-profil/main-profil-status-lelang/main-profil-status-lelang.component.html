@@ -9,11 +9,11 @@
   <div class="row">
     <div class="col">
       <h3 class="judul-bold">Kode Lot</h3>
-      <p>ABCE343</p>
+      <p>{{ vad.auctionobjectId.lotCode }}</p>
     </div>
     <div class="col">
       <h3 class="judul-bold">Status Lelang</h3>
-      <c-badge color="success" shape="rounded-pill">Dimulai</c-badge>
+      <p>{{ vad.auctionobjectId.status }}</p>
     </div>
     <!-- for status pembayaran -->
     <div class="col" *ngIf="vad.status !== 'PENDING'">
@@ -30,7 +30,10 @@
       <c-badge color="success" shape="rounded-pill">Lolos</c-badge>
     </div>
     <div class="col">
-      <button class="btn btn-primary btn-sm" routerLink="/status-lelang/detail">
+      <button
+        class="btn btn-primary btn-sm"
+        routerLink="/status-lelang/detail/{{ vad.id }}"
+      >
         Lihat Detail
       </button>
     </div>
@@ -39,15 +42,15 @@
   <div class="row mt-4">
     <div class="col">
       <h3 class="judul-bold">Nama Lot</h3>
-      <p>Rumah asoy gede banget</p>
+      <p>{{ vad.auctionobjectId.name }}</p>
     </div>
     <div class="col">
       <h3 class="judul-bold">Batas Akhir Uang Jaminan</h3>
-      <p>18 November 2019</p>
+      <p>{{ vad.auctionobjectId.collateralExpire | date: "dd-LLLL-yyyy" }}</p>
     </div>
     <div class="col">
-      <h4 class="judul-bold">Tanggal Lelang</h4>
-      <p>20 November 2019</p>
+      <h4 class="judul-bold">Waktu Mulai Lelang</h4>
+      <p>{{ vad.auctionobjectId.bidStart | date: "dd-LLLL-yyyy H:m" }}</p>
     </div>
   </div>
 </mat-card>
