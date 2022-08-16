@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { IconModule } from '@coreui/icons-angular';
-import { CarouselModule } from '@coreui/angular';
+import { AlertModule, CarouselModule } from '@coreui/angular';
 import { BadgeModule } from '@coreui/angular';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -127,7 +127,8 @@ import { KonfirmasiPembayaranJaminanComponent } from './components/konfirmasi-pe
     IconModule,
     BadgeModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    AlertModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,75 +1,37 @@
-<!-- cuma bisa klik kiri / kanan sekali saja -->
-<!-- <div class="row">
-  <div class="col-md-8 mx-auto">
-    <div
-      id="carouselExampleIndicators"
-      class="carousel slide"
-      data-bs-ride="carousel"
-    >
-      <ol class="carousel-indicators">
-        <li
-          data-target="#carouselExampleIndicators"
-          data-bs-slide-to="0"
-          class="active"
-        ></li>
-        <li data-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-        <li data-target="#carouselExampleIndicators" data-bs-slide-to="3"></li>
-        <li data-target="#carouselExampleIndicators" data-bs-slide-to="4"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="{{ slides[0] }}" alt="First slide" />
-        </div>
-        <div class="carousel-item" *ngIf="slides[1]">
-          <img class="d-block w-100" src="{{ slides[1] }}" alt="Second slide" />
-        </div>
-        <div class="carousel-item" *ngIf="slides[2]">
-          <img class="d-block w-100" src="{{ slides[2] }}" alt="Third slide" />
-        </div>
-        <div class="carousel-item" *ngIf="slides[3]">
-          <img class="d-block w-100" src="{{ slides[3] }}" alt="Third slide" />
-        </div>
-        <div class="carousel-item" *ngIf="slides[4]">
-          <img class="d-block w-100" src="{{ slides[4] }}" alt="Third slide" />
-        </div>
-      </div>
-      <a
-        class="carousel-control-prev"
-        href="#carouselExampleIndicators"
-        role="button"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a
-        class="carousel-control-next"
-        href="#carouselExampleIndicators"
-        role="button"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-</div> -->
-
-<div class="row">
-  <div class="col" *ngIf="slides[0]">
-    <img src="{{ slides[0] }}" class="img-fluid border-radius-lg" />
-  </div>
-  <div class="col" *ngIf="slides[1]">
-    <img src="{{ slides[1] }}" class="img-fluid border-radius-lg" />
-  </div>
-  <div class="col" *ngIf="slides[2]">
-    <img src="{{ slides[2] }}" class="img-fluid border-radius-lg" />
-  </div>
-  <div class="col" *ngIf="slides[3]">
-    <img src="{{ slides[3] }}" class="img-fluid border-radius-lg" />
-  </div>
-  <div class="col" *ngIf="slides[4]">
-    <img src="{{ slides[4] }}" class="img-fluid border-radius-lg" />
-  </div>
-</div>
+<c-carousel>
+  <c-carousel-indicators></c-carousel-indicators>
+  <c-carousel-inner>
+    <c-carousel-item *ngIf="slides[0]">
+      <img
+        [src]="slides[0].src"
+        class="d-block w-100"
+        loading="lazy" style="height: 750px;"/>
+    </c-carousel-item>
+    <c-carousel-item *ngIf="slides[1].src">
+      <img
+        [src]="slides[1].src"
+        class="d-block w-100"
+        loading="lazy" style="height: 750px;"/>
+    </c-carousel-item>
+    <c-carousel-item *ngIf="slides[2].src">
+      <img
+        [src]="slides[2].src"
+        class="d-block w-100"
+        loading="lazy" style="height: 750px;"/>
+    </c-carousel-item>
+    <c-carousel-item *ngIf="slides[3].src">
+      <img
+        [src]="slides[3].src"
+        class="d-block w-100"
+        loading="lazy" style="height: 750px;"/>
+    </c-carousel-item>
+    <c-carousel-item *ngIf="slides[4].src">
+      <img
+        [src]="slides[4].src"
+        class="d-block w-100"
+        loading="lazy" style="height: 750px;"/>
+    </c-carousel-item>
+  </c-carousel-inner>
+  <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+  <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+</c-carousel>
