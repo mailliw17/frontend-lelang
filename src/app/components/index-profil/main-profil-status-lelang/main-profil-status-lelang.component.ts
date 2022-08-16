@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const GET_VA_BY_ID_API = 'http://10.1.137.220:8772/getbyuserid/';
+const GET_VA_BY_ID_API = 'http://10.1.137.50:8772/getbyuserid/';
 
 @Component({
   selector: 'app-main-profil-status-lelang',

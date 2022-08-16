@@ -1,103 +1,181 @@
+<app-navbar></app-navbar>
 <div class="container">
-    <section class="section-services section-t8">
-        <h2>Kirim Penawaran</h2>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <table class="table text-center">
-                    <tbody>
-                        <tr class="penawaran-tertinggi">
-                            <td>Penawaran Tertinggi
-                                <br>
-                                <span>Saat ini</span>
-                                <br>
-                            </td>
-                        </tr>
-                        <tr class="penawaran-tertinggi-bg">
-                            <td>
-                                Rp 4.565.000
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Rp 4.200.000 (Anda)</td>
-
-                        </tr>
-                        <tr>
-                            <td>Rp 4.100.000</td>
-                        </tr>
-                        <tr>
-                            <td>Rp 3.100.000</td>
-                        </tr>
-                        <tr>
-                            <div class="spinner-border mt-3" role="status">
-                                <span class="sr-only"></span>
-                            </div>
-                        </tr>
-                    </tbody>
-                </table>
+  <section class="section-services section-t8">
+    <h2>Kirim Penawaran</h2>
+    <hr />
+    <div class="row">
+      <div class="col">
+        <table class="table text-center">
+          <tbody>
+            <tr class="penawaran-tertinggi text-white">
+              <td>
+                5 Penawaran Tertinggi
+                <br />
+                <span>Saat ini</span>
+                <br />
+              </td>
+            </tr>
+            <!-- <tr class="penawaran-tertinggi-bg text-white" >
+              <td>Rp 4.565.000</td>
+            </tr> -->
+            <tr>
+              <div class="spinner-border mt-3" role="status">
+                <span class="sr-only"></span>
+              </div>
+            </tr>
+            <tr *ngFor="let bid of biddingData">
+              <td>
+                {{ bid.value | number: "1.2-2" }}
+                <span
+                  class="badge bg-gradient-info"
+                  *ngIf="bid?.userId == userData?.id"
+                  >Anda</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <form [formGroup]="biddingForm" (ngSubmit)="createBidding()">
+          <label class="sr-only mb-2" for="inlineFormInputGroup"
+            >Penawaran Anda</label
+          >
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Rp</div>
             </div>
-            <div class="col">
-                <label class="sr-only mb-2" for="inlineFormInputGroup">Penawaran Anda</label>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">Rp</div>
-                    </div>
-                    <input type="number" class="form-control" id="inlineFormInputGroup">
-                </div>
+            <!--KALAU SUDAH PERNAH ADA YANG BIDDING -->
+            <input
+              type="number"
+              class="form-control"
+              value="{{ highestPrice }}"
+              formControlName="value"
+            />
+          </div>
 
-                <div class="text-center">
-                    <button class="btn btn-success  m-3">x10</button>
-                    <button class="btn btn-success btn-lg m-3">+</button>
-                    <button class="btn btn-danger btn-lg">-</button>
-                    <button class="btn btn-danger  m-3">x10</button>
-                </div>
+          <div class="text-center">
+            <button
+              type="button"
+              class="btn btn-success m-3"
+              (click)="increaseBidX10()"
+            >
+              x10
+            </button>
 
-                <div class="form-group">
-                    <label for="exampleInputEmail1" class="mb-2">Password</label>
-                    <input type="password" class="form-control" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">Masukan password akun anda setiap melakukan
-                        bidding</small>
-                </div>
+            <!-- + BUTTON -->
+            <button
+              type="button"
+              class="btn btn-success btn-lg m-3"
+              (click)="increaseBid()"
+            >
+              +
+            </button>
 
-                <div class="text-center m-3">
-                    <button class="btn btn-primary" routerLink="/lot-lelang/pengumuman-bidding"><i
-                            class="bi bi-send"></i> Kirim Penawaran</button>
-                </div>
+            <!-- - BUTTON -->
+            <button
+              type="button"
+              class="btn btn-danger btn-lg m-3"
+              (click)="decreaseBid()"
+            >
+              -
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-danger m-3"
+              (click)="decreaseBidX10()"
+            >
+              x10
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="mb-2">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              formControlName="password"
+            />
+            <small id="emailHelp" class="form-text text-muted"
+              >Masukan password akun anda setiap melakukan bidding</small
+            >
+          </div>
+
+          <!-- <div
+            *ngIf="
+              biddingForm.controls['password'].invalid &&
+              biddingForm.controls['password'].touched
+            "
+            class="alert alert-danger"
+          >
+            <div
+              *ngIf="biddingForm.controls['password'].errors?.['required']"
+              class="text-white"
+            >
+              Masukan password sebelum melakukan bidding
             </div>
-        </div>
-        <div class="row p-5">
-            <table class="table table-striped example-full-width">
-                <tbody>
-                    <tr>
-                        <th scope="row">Kode Lelang</th>
-                        <td>ASDD4324</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Nama Lot Lelang</th>
-                        <td>Rumah gede sitaan korupsi</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Mulai Penawaran</th>
-                        <td>19 November 2023 jam 10.00</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Batas Akhir Penawaran</th>
-                        <td class="text-danger">19 November 2023 jam 10.00</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Nilai Limit</th>
-                        <td>Rp 3.267.000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Kelipatan Penawaran</th>
-                        <td>Rp 150.000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Penyelenggara</th>
-                        <td>KPKNL Bogor</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+          </div> -->
+
+          <!-- user ID hidden form -->
+          <!-- <input type="text" formControlName="userId" /> -->
+
+          <div class="text-center m-3">
+            <button class="btn btn-primary" type="submit">
+              <i class="bi bi-send"></i> Kirim Penawaran
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row p-5">
+      <table class="table table-striped example-full-width">
+        <tbody>
+          <tr>
+            <th scope="row">Kode Lelang</th>
+            <td>{{ detailDataAuctionObject.lotCode }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Nama Lot Lelang</th>
+            <td>{{ detailDataAuctionObject.name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Mulai Penawaran</th>
+            <td>
+              {{ detailDataAuctionObject.bidStart | date: "dd-LLLL-yyyy H:mm" }}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Batas Akhir Penawaran</th>
+            <td class="text-danger">
+              {{
+                detailDataAuctionObject.bidExpire | date: "dd-LLLL-yyyy H:mm"
+              }}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Nilai Awal</th>
+            <td>
+              Rp {{ detailDataAuctionObject.initialPrice | number: "1.2-2" }}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Kelipatan Penawaran</th>
+            <td>
+              Rp
+              {{
+                detailDataAuctionObject.initialPrice * 0.01 | number: "1.2-2"
+              }}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Penyelenggara</th>
+            <td>{{ detailDataAuctionObject.organizer?.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>
+<app-footer></app-footer>

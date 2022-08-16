@@ -11,10 +11,27 @@
       <h3 class="judul-bold">Kode Lot</h3>
       <p>{{ vad.auctionobjectId.lotCode }}</p>
     </div>
-    <div class="col">
+
+    <div class="col" *ngIf="vad.auctionobjectId.status == 'SEDANG BERLANGSUNG'">
+      <h3 class="judul-bold">Status Lelang</h3>
+      <button class="btn btn-danger btn-sm text-white" type="button" disabled>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        {{ vad.auctionobjectId.status }}
+      </button>
+    </div>
+
+    <div
+      class="col"
+      *ngIf="vad.auctionobjectId.status !== 'SEDANG BERLANGSUNG'"
+    >
       <h3 class="judul-bold">Status Lelang</h3>
       <p>{{ vad.auctionobjectId.status }}</p>
     </div>
+
     <!-- for status pembayaran -->
     <div class="col" *ngIf="vad.status !== 'PENDING'">
       <h4 class="judul-bold">Status Uang Jaminan</h4>
@@ -25,10 +42,10 @@
       <c-badge color="warning" shape="rounded-pill">Belum Diterima</c-badge>
     </div>
 
-    <div class="col">
+    <!-- <div class="col">
       <h3 class="judul-bold">Status Peserta</h3>
       <c-badge color="success" shape="rounded-pill">Lolos</c-badge>
-    </div>
+    </div> -->
     <div class="col">
       <button
         class="btn btn-primary btn-sm"
@@ -50,7 +67,7 @@
     </div>
     <div class="col">
       <h4 class="judul-bold">Waktu Mulai Lelang</h4>
-      <p>{{ vad.auctionobjectId.bidStart | date: "dd-LLLL-yyyy H:m" }}</p>
+      <p>{{ vad.auctionobjectId.bidStart | date: "dd-LLLL-yyyy H:mm" }}</p>
     </div>
   </div>
 </mat-card>

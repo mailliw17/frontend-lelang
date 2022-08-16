@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
-const GET_DETAIL_API = 'http://10.1.137.220:8766/get/';
+const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
 
 @Component({
   selector: 'app-carousel-detail',

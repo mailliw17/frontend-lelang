@@ -4,10 +4,10 @@ import { FormBuilder, FormControl, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
-const GET_DETAIL_API = 'http://10.1.137.220:8766/get/';
+const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
 const GET_KTP_API = 'http://10.1.137.50:8761/ktp/user/';
 const GET_NPWP_API = 'http://10.1.137.50:8761/npwp/user/';
-const CREATE_VA_API = 'http://10.1.137.220:8772/create';
+const CREATE_VA_API = 'http://10.1.137.50:8772/create';
 const GET_REKENING_DATA_API = 'http://10.1.137.50:8761/rekening/user/';
 
 @Component({
@@ -129,6 +129,10 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
         },
         (err) => {
           console.log(err);
+          alert(
+            'Kamu sudah pernah melakukan booking lot lelang ini sebelumnya !'
+          );
+          this.router.navigate(['/status-lelang']);
         }
       );
   }

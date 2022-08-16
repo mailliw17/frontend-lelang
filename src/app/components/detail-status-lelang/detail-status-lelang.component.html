@@ -15,7 +15,7 @@
                 <th scope="row">Waktu Mulai</th>
                 <td>
                   {{
-                    dataVA.auctionobjectId?.bidStart | date: "dd-LLLL-yyyy H:m"
+                    dataVA.auctionobjectId?.bidStart | date: "dd-LLLL-yyyy H:mm"
                   }}
                 </td>
               </tr>
@@ -25,7 +25,12 @@
                 <th scope="row">Tindakan</th>
                 <td>
                   <!-- <p> Lelang Dimulai</p> -->
-                  <button class="btn btn-info" routerLink="/lot-lelang/bidding">
+                  <button
+                    class="btn btn-info"
+                    routerLink="/lot-lelang/bidding/{{
+                      dataVA.auctionobjectId?.id
+                    }}"
+                  >
                     Mulai Bidding
                   </button>
                 </td>
