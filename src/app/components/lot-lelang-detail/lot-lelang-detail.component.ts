@@ -7,7 +7,7 @@ import { DetailInfoPenjualComponent } from '../dialog/detail-info-penjual/detail
 import { DetailInfoPenyelenggaraComponent } from '../dialog/detail-info-penyelenggara/detail-info-penyelenggara.component';
 import { DetailLampiranComponent } from '../dialog/detail-lampiran/detail-lampiran.component';
 
-const GET_DETAIL_API = 'http://10.1.137.220:8766/get/';
+const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
 
 @Component({
   selector: 'app-lot-lelang-detail',

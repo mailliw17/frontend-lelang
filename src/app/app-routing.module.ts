@@ -38,7 +38,7 @@ const routes: Routes = [
     component: KonfirmasiIkutLelangComponent,
   },
   {
-    path: 'lot-lelang/bidding',
+    path: 'lot-lelang/bidding/:id',
     component: BiddingComponent,
   },
   {

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 // for faster development
-const GET_ALL_API = 'http://10.1.137.220:8766/getAll?size=2';
+const GET_ALL_API = 'http://10.1.137.50:8766/getAllUser';
 
 @Component({
   selector: 'app-lot-lelang',
@@ -23,6 +23,7 @@ export class LotLelangComponent implements OnInit {
   getAllData() {
     this.http.get<any>(GET_ALL_API).subscribe(
       (isi) => {
+        console.log(isi);
         this.dataAuctionObject = isi.content;
         // console.log(this.dataAuctionObject);
       },

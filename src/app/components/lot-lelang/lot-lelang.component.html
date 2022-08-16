@@ -117,7 +117,7 @@
         <div class="col-md-4" *ngFor="let dao of dataAuctionObject">
           <div class="card-box-a card-shadow">
             <div class="img-box-a">
-              <img src="{{ dao.imageURL1 }}" alt="" class="img-a img-fluid" />
+              <img src="{{ dao.image }}" alt="" class="img-a img-fluid" />
             </div>
             <div class="card-overlay">
               <div class="card-overlay-a-content">
@@ -130,7 +130,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">
                       <i class="bi bi-geo-alt"></i>
-                      {{ dao.organizer.name.substr(6) }} | Rp
+                      {{ dao.organizerName.substr(6) }} | Rp
                       {{ dao.initialPrice | number: "1.2-2" }}</span
                     >
                   </div>
