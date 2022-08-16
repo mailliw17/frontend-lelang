@@ -32,11 +32,12 @@ export class BiddingComponent implements OnInit {
   kelipatan: any;
   isBidBefore = false;
   subscription!: Subscription;
+  bidExpire: any;
 
   public biddingForm: FormGroup = new FormGroup({
     value: new FormControl(),
     password: new FormControl(),
-    userId: new FormControl(), //this mean user_id
+    userId: new FormControl(),
     auctionObjectId: new FormControl(),
   });
 
@@ -61,6 +62,15 @@ export class BiddingComponent implements OnInit {
     this.getUserData();
     this.getAOData();
     this.getHighestPrice();
+
+    // var time = new Date();
+    // console.log(
+    //   time.toLocaleString('en-US', {
+    //     hour: 'numeric',
+    //     minute: 'numeric',
+    //     hour12: false,
+    //   })
+    // );
   }
 
   // THIS FUNCTION CALLED EVERY 1 SECOND
@@ -79,6 +89,14 @@ export class BiddingComponent implements OnInit {
             this.isBidBefore = false;
             this.highestPrice = this.hargaAwal;
           }
+
+          // REDIRECT IF BID EXPIRED
+          const current = new Date().getTime();
+          const exp = new Date(this.bidExpire).getTime();
+          if (current > exp) {
+            // LANGSUNG PAKSA REDIRECT DAN TIDAK BISA KEMBALI
+            this.kickBidExpire();
+          }
         },
         (err) => {
           console.log(err);
@@ -86,13 +104,20 @@ export class BiddingComponent implements OnInit {
       );
   }
 
+  kickBidExpire() {
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    this.router.navigate(['lot-lelang/pengumuman-bidding/' + id]);
+  }
+
   getAOData() {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.http.get<any>(GET_AO_API + id).subscribe(
       (isi) => {
+        // console.log(isi);
         this.detailDataAuctionObject = isi;
         this.kelipatan = isi.initialPrice * 0.01;
         this.hargaAwal = isi.initialPrice;
+        this.bidExpire = isi.bidExpire;
       },
       (err) => {
         console.log(err);
@@ -104,7 +129,7 @@ export class BiddingComponent implements OnInit {
     const aoID = String(this.route.snapshot.paramMap.get('id'));
     this.profile.getUserData().subscribe(
       (isi) => {
-        console.log(isi);
+        // console.log(isi);
         this.userData = isi;
 
         //ASSIGN THE VALUE TO THE FORM
@@ -124,7 +149,6 @@ export class BiddingComponent implements OnInit {
   }
 
   createBidding() {
-    // console.log(this.biddingForm.value);
     this.http
       .post<any>(
         VERIFY_PASSWORD_API,

@@ -42,7 +42,7 @@ const routes: Routes = [
     component: BiddingComponent,
   },
   {
-    path: 'lot-lelang/pengumuman-bidding',
+    path: 'lot-lelang/pengumuman-bidding/:id',
     component: PengumumanBiddingComponent,
   },
   {

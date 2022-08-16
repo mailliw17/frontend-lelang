@@ -1,78 +1,109 @@
+<app-navbar></app-navbar>
 <div class="container">
-    <section class="section-services section-t8">
-        <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">SELAMAT</h4>
-            <p>Anda memenangkan bidding ini hebat banget lho wahh ampun suhu si paling jago deh</p>
-            <hr>
-            <p class="mb-0">Berikut langkah selanjutnya :</p>
-            <table class="table table-striped mt-3">
-                <tbody>
-                    <tr>
-                        <th scope="row">Nama Bank</th>
-                        <td>Bank Central Asia</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Nomor VA</th>
-                        <td>3242353432</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Atas Nama</th>
-                        <td>Jason Fang</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Batas Akhir Pelunasan</th>
-                        <td>02-03-2023</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Jumlah Pelunasan</th>
-                        <td>Rp 6.653.000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Informasi Tambahan</th>
-                        <td>
-                            <ul>
-                                <li>Jika objek lelang berupa tanah atau bangunan, maka anda wajib melunasi BPHTB dahulu
-                                    dan membawa bukti pembayaran saat pengambilan risalah lelang</li>
-                                <li>Pada saat pengambilan kutipan risalah lelang dan kuitansi pelunasan, siapkan materai
-                                    tempel Rp 10.000 sebanyak 2 (dua) buah</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+  <section class="section-services section-t8">
+    <!-- IF WIN -->
+    <div *ngIf="biddingDataWinner?.userId == userData?.id">
+      <div class="alert alert-info text-white" role="alert">
+        <h1 class="text-center text-white under font-weight-bold">
+          <u>SELAMAT ANDA MEMENANGKAN LELANG</u>
+        </h1>
+        <hr />
+        <p class="mb-0">
+          Anda harus membayar pelunasan biaya objek lelang setelah dikurangi
+          biaya jaminan yang telah anda bayarkan, berikut metode pembayaran yang
+          tersedia :
+        </p>
+      </div>
+
+      <div class="text-center">
+        <a
+          class="btn btn-primary m-1"
+          data-bs-toggle="collapse"
+          href="#collapseExample"
+          role="button"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          Virtual Account <i class="bi bi-chevron-down"></i>
+        </a>
+        <button
+          class="btn btn-success m-1"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseExample2"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          KPR Rumah Second <i class="bi bi-chevron-down"></i>
+        </button>
+      </div>
+
+      <div class="collapse text-center mt-2" id="collapseExample">
+        <div class="card card-body shadow-lg">
+          <a href=""
+            >Klik disini jika anda ingin memilih metode pembayaran Virtual
+            Account</a
+          >
         </div>
-        <h2>Data Penawaran</h2>
-        <div class="container">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Kode Penawaran</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Nilai</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>ABCR4234</td>
-                        <td>03-04-2022 11:59</td>
-                        <td>Rp. 4.567.000 (Penawaran Anda)</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>ABCR4234</td>
-                        <td>03-04-2022 11:59</td>
-                        <td>Rp. 4.567.000 (Penawaran Anda)</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>ABCR4234</td>
-                        <td>03-04-2022 11:59</td>
-                        <td>Rp. 4.567.000 (Penawaran Anda)</td>
-                    </tr>
-                </tbody>
-            </table>
+      </div>
+
+      <div class="collapse text-center mt-2" id="collapseExample2">
+        <div class="card card-body shadow-lg">
+          <a href=""
+            >Klik disini jika anda ingin memilih metode pembayaran KPR Rumah
+            Second</a
+          >
         </div>
-    </section>
+      </div>
+    </div>
+
+    <!-- EOF IF WIN -->
+
+    <!-- IF LOSE -->
+    <div
+      class="alert alert-danger text-white"
+      role="alert"
+      *ngIf="biddingDataWinner?.userId !== userData?.id"
+    >
+      <h1 class="text-center text-white under font-weight-bold">
+        <u>MAAF ANDA GAGAL MENDAPATKAN OBJEK LELANG INI</u>
+      </h1>
+      <hr />
+      <p class="text-center">
+        <a routerLink="lot-lelang">Klik disini</a>
+        untuk mengikuti lelang lainnya
+      </p>
+    </div>
+    <!-- EOF LOSE -->
+    <hr />
+    <h2>Data Riwayat Penawaran</h2>
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Kode Penawaran</th>
+            <th scope="col">Tanggal</th>
+            <th scope="col">Nilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bid of biddingData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ bid.biddingCode }}</td>
+            <td>{{ bid.dateCreated | date: "dd-LLLL-yyyy H:mm" }}</td>
+            <td>
+              Rp {{ bid.value | number: "1.2-2" }}
+              <span
+                class="badge bg-gradient-info"
+                *ngIf="bid?.userId == userData?.id"
+                >Anda</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>
+<app-footer></app-footer>
