@@ -123,6 +123,17 @@ export class MainProfilRekeningBankComponent implements OnInit {
             console.log(err);
           }
         );
+    } else {
+      this.rekening
+                .createRekeningData(this.rekeningDataForm.value)
+                .subscribe(
+                  (isi) => {
+                    window.location.reload();
+                  },
+                  (err) => {
+                    console.log(err);
+                  }
+                );
     }
   }
 
