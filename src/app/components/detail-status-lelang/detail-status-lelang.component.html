@@ -19,12 +19,12 @@
                   }}
                 </td>
               </tr>
+              <!-- JIKA SESI BIDDING SEDANG BERLANGSUNG -->
               <tr
                 *ngIf="dataVA.auctionobjectId?.status == 'SEDANG BERLANGSUNG'"
               >
                 <th scope="row">Tindakan</th>
                 <td>
-                  <!-- <p> Lelang Dimulai</p> -->
                   <button
                     class="btn btn-info"
                     routerLink="/lot-lelang/bidding/{{
@@ -35,6 +35,23 @@
                   </button>
                 </td>
               </tr>
+              <!-- EOF SESI BIDDING SEDANG BERLANGSUNG -->
+
+              <!-- SESI BIDDING SUDAH SELESAI -->
+              <tr *ngIf="dataVA.auctionobjectId?.status == 'SUDAH SELESAI'">
+                <th scope="row">Tindakan</th>
+                <td>
+                  <button
+                    class="btn btn-info"
+                    routerLink="/lot-lelang/pengumuman-bidding/{{
+                      dataVA.auctionobjectId?.id
+                    }}"
+                  >
+                    Lihat hasil
+                  </button>
+                </td>
+              </tr>
+              <!--EOF SESI BIDDING SUDAH SELESAI  -->
             </tbody>
           </table>
         </div>

@@ -42,7 +42,7 @@ const routes: Routes = [
     component: BiddingComponent,
   },
   {
-    path: 'lot-lelang/pengumuman-bidding',
+    path: 'lot-lelang/pengumuman-bidding/:id',
     component: PengumumanBiddingComponent,
   },
   {
@@ -64,6 +64,10 @@ const routes: Routes = [
   },
   {
     path: 'status-lelang',
+    component: ProfilComponent,
+  },
+  {
+    path: 'pelunasan-lelang',
     component: ProfilComponent,
   },
   {

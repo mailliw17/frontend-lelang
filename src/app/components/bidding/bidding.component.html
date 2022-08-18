@@ -23,9 +23,9 @@
                 <span class="sr-only"></span>
               </div>
             </tr>
-            <tr *ngFor="let bid of biddingData">
+            <tr *ngFor="let bid of biddingData | slice: 0:5">
               <td>
-                {{ bid.value | number: "1.2-2" }}
+                Rp {{ bid.value | number: "1.2-2" }}
                 <span
                   class="badge bg-gradient-info"
                   *ngIf="bid?.userId == userData?.id"
@@ -103,24 +103,6 @@
             >
           </div>
 
-          <!-- <div
-            *ngIf="
-              biddingForm.controls['password'].invalid &&
-              biddingForm.controls['password'].touched
-            "
-            class="alert alert-danger"
-          >
-            <div
-              *ngIf="biddingForm.controls['password'].errors?.['required']"
-              class="text-white"
-            >
-              Masukan password sebelum melakukan bidding
-            </div>
-          </div> -->
-
-          <!-- user ID hidden form -->
-          <!-- <input type="text" formControlName="userId" /> -->
-
           <div class="text-center m-3">
             <button class="btn btn-primary" type="submit">
               <i class="bi bi-send"></i> Kirim Penawaran
@@ -141,13 +123,13 @@
             <td>{{ detailDataAuctionObject.name }}</td>
           </tr>
           <tr>
-            <th scope="row">Mulai Penawaran</th>
+            <th scope="row">Mulai Lelang</th>
             <td>
               {{ detailDataAuctionObject.bidStart | date: "dd-LLLL-yyyy H:mm" }}
             </td>
           </tr>
           <tr>
-            <th scope="row">Batas Akhir Penawaran</th>
+            <th scope="row">Selesai Lelang</th>
             <td class="text-danger">
               {{
                 detailDataAuctionObject.bidExpire | date: "dd-LLLL-yyyy H:mm"
