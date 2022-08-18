@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { IconModule } from '@coreui/icons-angular';
-import { CarouselModule } from '@coreui/angular';
+import { AlertModule, CarouselModule } from '@coreui/angular';
 import { BadgeModule } from '@coreui/angular';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -129,7 +129,8 @@ import { MainProfilPelunasanLelangComponent } from './components/index-profil/ma
     IconModule,
     BadgeModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    AlertModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,7 +12,8 @@ const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
 })
 export class CarouselDetailComponent implements OnInit {
   detailDataAuctionObject: any = {};
-  slides: any[] = [];
+  //slides: any[] = [];
+  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
 
   constructor(
     public dialog: MatDialog,
@@ -28,28 +29,21 @@ export class CarouselDetailComponent implements OnInit {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.http.get<any>(GET_DETAIL_API + id).subscribe(
       (isi) => {
-        // console.log(isi.imageURL1);
-        // this.detailDataAuctionObject = isi;
-        this.slides.push(isi.imageURL1);
-        this.slides.push(isi.imageURL2);
-        this.slides.push(isi.imageURL3);
-        this.slides.push(isi.imageURL4);
-        this.slides.push(isi.imageURL5);
-        // console.log(this.slides);
-        // this.slides[0] = {
-        //   src: isi.imageURL2,
-        // };
-        // this.slides[1] = {
-        //   src: isi.imageURL2,
-        // };
-        // this.slides[2] = {
-        //   src: isi.imageURL3,
-        // };
-        // this.slides[3] = {
-        //   src: isi.imageURL4,
-        // };
-
-        // console.log(this.slides);
+        this.slides[0] = {
+          src: isi.imageURL1,
+        };
+        this.slides[1] = {
+          src: isi.imageURL2,
+        };
+        this.slides[2] = {
+          src: isi.imageURL3,
+        };
+        this.slides[3] = {
+          src: isi.imageURL4,
+        };
+        this.slides[4] = {
+          src: isi.imageURL5,
+        };
       },
       (err) => {
         console.log(err);

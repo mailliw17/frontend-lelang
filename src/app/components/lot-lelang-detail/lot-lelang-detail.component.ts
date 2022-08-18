@@ -43,7 +43,7 @@ export class LotLelangDetailComponent implements OnInit {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.http.get<any>(GET_DETAIL_API + id).subscribe(
       (isi) => {
-        // console.log(isi);
+        console.log(isi);
         this.detailDataAuctionObject = isi;
       },
       (err) => {
