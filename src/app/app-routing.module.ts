@@ -14,6 +14,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { BiddingComponent } from './components/bidding/bidding.component';
 import { PengumumanBiddingComponent } from './components/pengumuman-bidding/pengumuman-bidding.component';
 import { KonfirmasiPembayaranJaminanComponent } from './components/konfirmasi-pembayaran-jaminan/konfirmasi-pembayaran-jaminan.component';
+import { FormKprTambahComponent } from './components/form-kpr-tambah/form-kpr-tambah.component';
 
 const routes: Routes = [
   {
@@ -109,6 +110,10 @@ const routes: Routes = [
   {
     path: 'konfirmasi-pembayaran-jaminan',
     component: KonfirmasiPembayaranJaminanComponent,
+  },
+  {
+    path: 'form-kpr/tambah',
+    component: FormKprTambahComponent,
   },
 ];
 

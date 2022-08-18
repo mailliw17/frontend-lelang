@@ -1,7 +1,9 @@
+<h1>Pelunasan Jaminan Lelang</h1>
+<hr />
 <mat-card *ngIf="vaData.length == 0">
   <mat-card-title>Status Lelang</mat-card-title>
   <div class="alert alert-warning text-white" role="alert">
-    Tidak ada lelang yang pernah anda ikuti
+    Anda belum pernah melakukan transaksi lelang
   </div>
 </mat-card>
 
@@ -15,12 +17,19 @@
     <div class="col" *ngIf="vad.auctionobjectId.status == 'SEDANG BERLANGSUNG'">
       <h3 class="judul-bold">Status Lelang</h3>
       <button class="btn btn-danger btn-sm text-white" type="button" disabled>
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
         {{ vad.auctionobjectId.status }}
       </button>
     </div>
 
-    <div class="col" *ngIf="vad.auctionobjectId.status !== 'SEDANG BERLANGSUNG'">
+    <div
+      class="col"
+      *ngIf="vad.auctionobjectId.status !== 'SEDANG BERLANGSUNG'"
+    >
       <h3 class="judul-bold">Status Lelang</h3>
       <p>{{ vad.auctionobjectId.status }}</p>
     </div>
@@ -40,7 +49,10 @@
       <c-badge color="success" shape="rounded-pill">Lolos</c-badge>
     </div> -->
     <div class="col">
-      <button class="btn btn-primary btn-sm" routerLink="/status-lelang/detail/{{ vad.id }}">
+      <button
+        class="btn btn-primary btn-sm"
+        routerLink="/status-lelang/detail/{{ vad.id }}"
+      >
         Lihat Detail
       </button>
     </div>

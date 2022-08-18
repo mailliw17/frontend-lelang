@@ -1,18 +1,21 @@
 <app-navbar></app-navbar>
 <div class="container">
   <section class="section-services section-t8">
-    <h1>Detail Status Lelang & Pembayaran Uang Jaminan</h1>
+    <h1>Detail Status Lelang & Pembayaran</h1>
     <mat-card>
       <div class="row">
         <div class="col-md-6">
           <table class="table table-striped">
             <tbody>
+              <!-- <tr>
+                <th scope="row">Detail Status Lelang</th>
+              </tr> -->
               <tr>
                 <th scope="row">Status Lelang</th>
                 <td>{{ dataVA.auctionobjectId?.status }}</td>
               </tr>
               <tr>
-                <th scope="row">Waktu Mulai</th>
+                <th scope="row">Waktu Mulai Lelang</th>
                 <td>
                   {{
                     dataVA.auctionobjectId?.bidStart | date: "dd-LLLL-yyyy H:mm"
@@ -58,9 +61,9 @@
         <div class="col-md-6">
           <table class="table table-striped">
             <tbody>
-              <tr>
-                <th scope="row">UANG JAMINAN LELANG</th>
-              </tr>
+              <!-- <tr>
+                <th scope="row">Pembayaran</th>
+              </tr> -->
               <tr>
                 <th scope="row">Nominam Uang Jaminan</th>
                 <td>Rp{{ dataVA.value | number: "1.2-2" }}</td>

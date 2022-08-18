@@ -1,7 +1,8 @@
+<h1>Pelunasan Uang Lelang</h1>
 <mat-card *ngIf="vaData.length == 0">
   <mat-card-title>Status Pelunasan</mat-card-title>
   <div class="alert alert-warning text-white" role="alert">
-    Tidak ada lelang yang pernah anda ikuti
+    Anda belum pernah melakukan transaksi pelunasan lelang
   </div>
 </mat-card>
 
@@ -34,11 +35,11 @@
 
     <!-- for status pembayaran -->
     <div class="col" *ngIf="vad.status !== 'PENDING'">
-      <h4 class="judul-bold">Status Uang Jaminan</h4>
+      <h4 class="judul-bold">Status Uang Pelunasan</h4>
       <c-badge color="success" shape="rounded-pill">Diterima</c-badge>
     </div>
     <div class="col" *ngIf="vad.status == 'PENDING'">
-      <h4 class="judul-bold">Status Uang Jaminan</h4>
+      <h4 class="judul-bold">Status Uang Pelunasan</h4>
       <c-badge color="warning" shape="rounded-pill">Belum Diterima</c-badge>
     </div>
 
@@ -61,13 +62,13 @@
       <h3 class="judul-bold">Nama Lot</h3>
       <p>{{ vad.auctionobjectId.name }}</p>
     </div>
-    <div class="col">
+    <!-- <div class="col">
       <h3 class="judul-bold">Batas Akhir Uang Jaminan</h3>
       <p>{{ vad.auctionobjectId.collateralExpire | date: "dd-LLLL-yyyy" }}</p>
     </div>
     <div class="col">
       <h4 class="judul-bold">Waktu Mulai Lelang</h4>
       <p>{{ vad.auctionobjectId.bidStart | date: "dd-LLLL-yyyy H:mm" }}</p>
-    </div>
+    </div> -->
   </div>
 </mat-card>

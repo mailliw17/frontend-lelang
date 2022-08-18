@@ -63,6 +63,7 @@ import { CarouselDetailComponent } from './components/carousel-detail/carousel-d
 import { DataTablesModule } from 'angular-datatables';
 import { KonfirmasiPembayaranJaminanComponent } from './components/konfirmasi-pembayaran-jaminan/konfirmasi-pembayaran-jaminan.component';
 import { MainProfilPelunasanLelangComponent } from './components/index-profil/main-profil-pelunasan-lelang/main-profil-pelunasan-lelang.component';
+import { FormKprTambahComponent } from './components/form-kpr-tambah/form-kpr-tambah.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { MainProfilPelunasanLelangComponent } from './components/index-profil/ma
     CarouselDetailComponent,
     KonfirmasiPembayaranJaminanComponent,
     MainProfilPelunasanLelangComponent,
+    FormKprTambahComponent,
   ],
   imports: [
     BrowserModule,
