@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { IconModule } from '@coreui/icons-angular';
 import { AlertModule, CarouselModule } from '@coreui/angular';
@@ -132,7 +132,7 @@ import { MainProfilPelunasanLelangComponent } from './components/index-profil/ma
     DataTablesModule,
     AlertModule
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

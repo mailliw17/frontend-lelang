@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
       scdPassword: [''],
       phoneNum: [''],
       dateOb: [''],
+      gender: [''],
     });
   }
 

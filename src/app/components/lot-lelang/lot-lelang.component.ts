@@ -1,10 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { City } from 'src/app/_class/city';
+import { Province } from 'src/app/_class/province';
+import { AddressService } from 'src/app/_services/address.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
+import { filter } from 'rxjs/operators';
 
 // for faster development
 const GET_ALL_API = 'http://10.1.137.50:8766/getAllUser';
+const FILTER_API = 'http://10.1.137.50:8766/getAuctionObjectFilter'
 
 @Component({
   selector: 'app-lot-lelang',
@@ -12,20 +18,91 @@ const GET_ALL_API = 'http://10.1.137.50:8766/getAllUser';
   styleUrls: ['./lot-lelang.component.css'],
 })
 export class LotLelangComponent implements OnInit {
+  filterForm!: FormGroup;
   dataAuctionObject: any = [];
+  provinceData: Province[] = [];
+  cityData: City[] = [];
+  currPage: number = 0;
+  totalElements: number = 0;
+  pages: number = 0;
+  isClicked = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private address: AddressService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.currPage = params['page'] ? params['page'] - 1 : 0;
+    });
+
+
     this.getAllData();
+
+    this.address.getProvince().subscribe(
+      (isi) => {
+        this.provinceData = isi;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    this.filterForm = this.formBuilder.group({
+      startPrice: [''],
+      endPrice: [''],
+      province: [''],
+      city: ['']
+    });
+  }
+
+  provinceChanged() {
+    console.log(this.filterForm.value.province);
+    this.address.getCity(this.filterForm.value.province).subscribe(
+      (isi) => {
+        this.cityData = isi;
+      }
+    );
   }
 
   getAllData() {
-    this.http.get<any>(GET_ALL_API).subscribe(
+    const params = new HttpParams()
+      .set('page', this.currPage.toString())
+      .set('size', '8');
+    this.http.get<any>(GET_ALL_API, {params}).subscribe(
       (isi) => {
         console.log(isi);
         this.dataAuctionObject = isi.content;
+        this.totalElements = isi.totalElements;
+        this.pages = Math.ceil(this.totalElements / 8);
         // console.log(this.dataAuctionObject);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  filtering() {
+    this.currPage = 0;
+    const params = new HttpParams()
+      .set('startPrice', this.filterForm.value.startPrice)
+      .set('endPrice', this.filterForm.value.endPrice)
+      .set('province', this.filterForm.value.province)
+      .set('city', this.filterForm.value.city)
+      .set('page', this.currPage.toString())
+      .set('size', '8');
+    this.http.get<any>(FILTER_API, {params}).subscribe(
+      (isi) => {
+        console.log(isi.content);
+        this.dataAuctionObject = isi.content;
+        this.totalElements = isi.totalElements;
+        this.pages = Math.ceil(this.totalElements / 8);
       },
       (err) => {
         console.log(err);
