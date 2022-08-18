@@ -1,4 +1,62 @@
 <main id="main">
+  <section class="section-services section-t8" *ngIf="isLoggedIn == true">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Status Pendaftaranmu</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card-box-c foo">
+            <div class="card-header-c d-flex">
+              <div class="card-status-box-ico">
+                <h2>KTP</h2>
+                <div *ngIf="isKtpExist">
+                  <span class="bi bi-check-circle" style="color: green;" *ngIf="ktpData.isApproved"></span>
+                  <span class="bi bi-x-circle" style="color: red" *ngIf="!ktpData.isApproved"></span>
+                </div>
+                <div *ngIf="!isKtpExist">
+                  <span class="bi bi-x-circle" style="color: red"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-box-c foo">
+            <div class="card-header-c d-flex">
+              <div class="card-status-box-ico">
+                <h2>NPWP</h2>
+                <div *ngIf="isNpwpExist">
+                  <span class="bi bi-check-circle" style="color: green;" *ngIf="npwpData.isApproved"></span>
+                  <span class="bi bi-x-circle" style="color: red" *ngIf="!npwpData.isApproved"></span>
+                </div>
+                <div *ngIf="!isNpwpExist">
+                  <span class="bi bi-x-circle" style="color: red"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-box-c foo">
+            <div class="card-header-c d-flex">
+              <div class="card-status-box-ico">
+                <h2>Rekening</h2>
+                <span class="bi bi-check-circle" style="color: green;" *ngIf="isRekeningExist"></span>
+                <span class="bi bi-x-circle" style="color: red" *ngIf="!isRekeningExist"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
     <!-- ======= Agents Section ======= -->
     <section class="section-agents section-t8">
         <div class="container">
@@ -47,32 +105,6 @@
                                     </p>
                                 </div>
                             </div>
-                            <!-- <div class="card-footer-d">
-                                <div class="socials-footer d-flex justify-content-center">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a href="#" class="link-one">
-                                                <i class="bi bi-facebook" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" class="link-one">
-                                                <i class="bi bi-twitter" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" class="link-one">
-                                                <i class="bi bi-instagram" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" class="link-one">
-                                                <i class="bi bi-linkedin" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
