@@ -11,6 +11,10 @@
             <app-main-profil-status-lelang></app-main-profil-status-lelang>
           </div>
 
+          <div *ngIf="this.router.url == '/pelunasan-lelang'">
+            <app-main-profil-pelunasan-lelang></app-main-profil-pelunasan-lelang>
+          </div>
+
           <div *ngIf="this.router.url == '/profil/ktp'">
             <app-main-profil-ktp></app-main-profil-ktp>
           </div>

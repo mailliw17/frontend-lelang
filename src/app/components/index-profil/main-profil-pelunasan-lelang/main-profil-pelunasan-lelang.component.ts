@@ -6,11 +6,11 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 const GET_VA_BY_ID_API = 'http://10.1.137.50:8772/getbyuserid/';
 
 @Component({
-  selector: 'app-main-profil-status-lelang',
-  templateUrl: './main-profil-status-lelang.component.html',
-  styleUrls: ['./main-profil-status-lelang.component.css'],
+  selector: 'app-main-profil-pelunasan-lelang',
+  templateUrl: './main-profil-pelunasan-lelang.component.html',
+  styleUrls: ['./main-profil-pelunasan-lelang.component.css'],
 })
-export class MainProfilStatusLelangComponent implements OnInit {
+export class MainProfilPelunasanLelangComponent implements OnInit {
   vaData: any[] = [];
   aoData: any = [];
   aoId: any[] = [];
@@ -40,10 +40,10 @@ export class MainProfilStatusLelangComponent implements OnInit {
       .get<any>(GET_VA_BY_ID_API + user.id, this.httpOptions_base)
       .subscribe(
         (isi) => {
-          // FOREACH 'ISI' UNTUK MENGAMBIL VIRTUAL ACCOUNT NUMBER YANG DEPANNYA 697 (JAMINAN)
+          // FOREACH 'ISI' UNTUK MENGAMBIL VIRTUAL ACCOUNT NUMBER YANG DEPANNYA 796 (PELUNASAN)
           isi.forEach((element: { noVa: any }) => {
             var terserah: string = element.noVa;
-            if (terserah.substring(0, 3) === '697') {
+            if (terserah.substring(0, 3) === '796') {
               this.vaData.push(element);
             }
           });

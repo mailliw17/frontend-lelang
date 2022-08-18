@@ -67,6 +67,10 @@ const routes: Routes = [
     component: ProfilComponent,
   },
   {
+    path: 'pelunasan-lelang',
+    component: ProfilComponent,
+  },
+  {
     path: 'status-lelang/detail/:id',
     component: DetailStatusLelangComponent,
   },
