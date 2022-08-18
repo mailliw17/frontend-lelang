@@ -23,15 +23,13 @@ export class AddressService {
 
   getProvince(): Observable<Province[]> {
     return this.http.get<Province[]>(
-      `${BASE_URL}/province/getAll`,
-      this.httpOptions_base
+      `${BASE_URL}/province/getAll`
     );
   }
 
   getCity(provinceName: string): Observable<City[]> {
     return this.http.get<City[]>(
-      `${BASE_URL}/city/getAll/name?provinceName=${provinceName}`,
-      this.httpOptions_base
+      `${BASE_URL}/city/getAll/name?provinceName=${provinceName}`
     );
   }
 }

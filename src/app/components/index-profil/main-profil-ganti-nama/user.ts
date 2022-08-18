@@ -9,4 +9,7 @@ export interface User {
   password: string;
   scdPassword: string;
   status: string;
+  gender: string;
+  income: string;
+  loanAmount: number;
 }
