@@ -36,7 +36,7 @@ export class DetailStatusLelangComponent implements OnInit {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.http.get<any>(GET_BY_ID_API + id, this.httpOptions_base).subscribe(
       (isi) => {
-        console.log(isi);
+        // console.log(isi);
         this.dataVA = isi;
       },
       (err) => {

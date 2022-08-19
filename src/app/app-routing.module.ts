@@ -24,142 +24,142 @@ const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full',
     data: {
-      title: 'Home - audiBCA'
-    }
+      title: 'Home - audiBCA',
+    },
   },
   {
     path: 'home',
     component: HomeComponent,
     data: {
-      title: 'Home - audiBCA'
-    }
+      title: 'Home - audiBCA',
+    },
   },
   {
     path: 'lot-lelang',
     component: LotLelangComponent,
     data: {
-      title: 'Lot Lelang - audiBCA'
-    }
+      title: 'Lot Lelang - audiBCA',
+    },
   },
   {
     path: 'lot-lelang/detail/:id',
     component: LotLelangDetailComponent,
     data: {
-      title: 'Lot Lelang Detail - audiBCA'
-    }
+      title: 'Lot Lelang Detail - audiBCA',
+    },
   },
   {
     path: 'lot-lelang/konfirmasi-ikut-lelang/:id',
     component: KonfirmasiIkutLelangComponent,
     data: {
-      title: 'Konfirmasi Ikut Lelang - audiBCA'
-    }
+      title: 'Konfirmasi Ikut Lelang - audiBCA',
+    },
   },
   {
     path: 'lot-lelang/bidding/:id',
     component: BiddingComponent,
     data: {
-      title: 'Bidding - audiBCA'
-    }
+      title: 'Bidding - audiBCA',
+    },
   },
   {
     path: 'lot-lelang/pengumuman-bidding/:id',
     component: PengumumanBiddingComponent,
     data: {
-      title: 'Pengumuman Bidding - audiBCA'
-    }
+      title: 'Pengumuman Bidding - audiBCA',
+    },
   },
   {
     path: 'login',
     component: LoginComponent,
     data: {
-      title: 'Login - audiBCA'
-    }
+      title: 'Login - audiBCA',
+    },
   },
   {
     path: 'logout',
     redirectTo: '/login',
     pathMatch: 'full',
     data: {
-      title: 'Login - audiBCA'
-    }
+      title: 'Login - audiBCA',
+    },
   },
   {
     path: 'register',
     component: RegisterComponent,
     data: {
-      title: 'Register - audiBCA'
-    }
+      title: 'Register - audiBCA',
+    },
   },
   {
     path: 'lupa-password',
     component: LupaPasswordComponent,
     data: {
-      title: 'Lupa Password - audiBCA'
-    }
+      title: 'Lupa Password - audiBCA',
+    },
   },
   {
     path: 'status-lelang',
     component: ProfilComponent,
     data: {
-      title: 'Status Lelang - audiBCA'
-    }
+      title: 'Status Lelang - audiBCA',
+    },
   },
   {
     path: 'pelunasan-lelang',
     component: ProfilComponent,
     data: {
-      title: 'Pelunasan Lelang - audiBCA'
-    }
+      title: 'Pelunasan Lelang - audiBCA',
+    },
   },
   {
     path: 'status-lelang/detail/:id',
     component: DetailStatusLelangComponent,
     data: {
-      title: 'Status Lelang Detail - audiBCA'
-    }
+      title: 'Status Lelang Detail - audiBCA',
+    },
   },
   {
     path: 'profil/ktp',
     component: ProfilComponent,
     data: {
-      title: 'KTP - audiBCA'
-    }
+      title: 'KTP - audiBCA',
+    },
   },
   {
     path: 'profil/rekening-bank',
     component: ProfilComponent,
     data: {
-      title: 'Rekening Bank - audiBCA'
-    }
+      title: 'Rekening Bank - audiBCA',
+    },
   },
   {
     path: 'profil/npwp',
     component: ProfilComponent,
     data: {
-      title: 'NPWP - audiBCA'
-    }
+      title: 'NPWP - audiBCA',
+    },
   },
   {
     path: 'profil/ganti-password',
     component: ProfilComponent,
     data: {
-      title: 'Ganti Password - audiBCA'
-    }
+      title: 'Ganti Password - audiBCA',
+    },
   },
   {
     path: 'profil/ganti-nama',
     component: ProfilComponent,
     data: {
-      title: 'Ganti Profil - audiBCA'
-    }
+      title: 'Ganti Profil - audiBCA',
+    },
   },
   {
     path: 'profil/ganti-nomor-hp',
     component: ProfilComponent,
     data: {
-      title: 'Ganti Nomor HP - audiBCA'
-    }
+      title: 'Ganti Nomor HP - audiBCA',
+    },
   },
   {
     path: 'profil/riwayat-kpr',
@@ -169,30 +169,36 @@ const routes: Routes = [
     path: 'syarat-dan-ketentuan',
     component: SyaratDanKetentuanComponent,
     data: {
-      title: 'Syarat Dan Ketentuan - audiBCA'
-    }
+      title: 'Syarat Dan Ketentuan - audiBCA',
+    },
   },
   {
     path: 'faq',
     component: FaqComponent,
     data: {
-      title: 'FAQ - audiBCA'
-    }
+      title: 'FAQ - audiBCA',
+    },
   },
   {
     path: 'konfirmasi-pembayaran-jaminan',
     component: KonfirmasiPembayaranJaminanComponent,
     data: {
-      title: 'Konfirmasi Pembayaran Jaminan - audiBCA'
-    }
+      title: 'Konfirmasi Pembayaran Jaminan - audiBCA',
+    },
   },
   {
     path: 'form-kpr/tambah',
     component: FormKprTambahComponent,
+    data: {
+      title: 'Form KPR - audiBCA',
+    },
   },
   {
     path: 'form-kpr/sukses',
     component: FormKprSuksesComponent,
+    data: {
+      title: 'Sukses Isi Form - audiBCA',
+    },
   },
 ];
 

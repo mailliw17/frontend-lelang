@@ -13,11 +13,10 @@ import { User } from '../navbar/user';
 @Component({
   selector: 'app-latest-properties',
   templateUrl: './latest-properties.component.html',
-  styleUrls: ['./latest-properties.component.css']
+  styleUrls: ['./latest-properties.component.css'],
 })
 export class LatestPropertiesComponent implements OnInit {
-
-  imgUrl: string = "assets/img/property-6.jpg"
+  imgUrl: string = 'assets/img/property-6.jpg';
   isLoggedIn = false;
   ktpData!: Ktp;
   npwpData!: Npwp;
@@ -34,7 +33,7 @@ export class LatestPropertiesComponent implements OnInit {
     private npwp: NpwpService,
     private rekening: RekeningService,
     private profile: ProfileService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.token.getToken()) {
@@ -51,8 +50,9 @@ export class LatestPropertiesComponent implements OnInit {
       (isi) => {
         this.ktpData = isi;
         this.isKtpExist = true;
-        console.log(this.ktpData);
-      }, err => {
+        // console.log(this.ktpData);
+      },
+      (err) => {
         this.isKtpExist = false;
         console.log(this.isKtpExist);
       }
@@ -64,8 +64,9 @@ export class LatestPropertiesComponent implements OnInit {
       (isi) => {
         this.npwpData = isi;
         this.isNpwpExist = true;
-        console.log(this.npwpData);
-      }, err => {
+        // console.log(this.npwpData);
+      },
+      (err) => {
         this.isNpwpExist = false;
         console.log(this.isNpwpExist);
       }
@@ -77,8 +78,9 @@ export class LatestPropertiesComponent implements OnInit {
       (isi) => {
         this.rekeningData = isi;
         this.isRekeningExist = true;
-        console.log(this.rekeningData);
-      }, err => {
+        // console.log(this.rekeningData);
+      },
+      (err) => {
         this.isRekeningExist = false;
         console.log(this.isRekeningExist);
       }
@@ -88,18 +90,17 @@ export class LatestPropertiesComponent implements OnInit {
   getDataUser() {
     this.profile.getUserData().subscribe(
       (isi) => {
-        if(isi.loanAmount != null) {
+        if (isi.loanAmount != null) {
           this.isLoanExist = true;
         }
-        if(isi.income != null) {
+        if (isi.income != null) {
           this.isIncomeExist = true;
         }
       },
       (err) => {
-        console.log('gapapa belum login');
+        // console.log('gapapa belum login');
         console.log(err);
       }
     );
   }
-
 }
