@@ -42,10 +42,10 @@ export class MainProfilRekeningBankComponent implements OnInit {
     this.rekening.getRekeningData(this.token.getUser().id).subscribe(
       (isi) => {
         this.rekeningData = isi;
-        if (isi.length > 0) {
+        if (isi) {
           this.isExist = true;
         }
-        // elsxe {
+        // else {
         //   this.isExist = false;
         // }
         this.dtTrigger.next(this.rekeningData);
@@ -124,16 +124,14 @@ export class MainProfilRekeningBankComponent implements OnInit {
           }
         );
     } else {
-      this.rekening
-                .createRekeningData(this.rekeningDataForm.value)
-                .subscribe(
-                  (isi) => {
-                    window.location.reload();
-                  },
-                  (err) => {
-                    console.log(err);
-                  }
-                );
+      this.rekening.createRekeningData(this.rekeningDataForm.value).subscribe(
+        (isi) => {
+          window.location.reload();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
   }
 
