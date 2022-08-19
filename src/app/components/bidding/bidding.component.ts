@@ -9,8 +9,9 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from 'src/app/_services/profile.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
-import { Observable, Subscription, timer } from 'rxjs';
+import { interval, Observable, Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { CurrencyMaskInputMode } from 'ngx-currency';
 
 const GET_AO_API = 'http://10.1.137.50:8766/get/';
 const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
@@ -33,6 +34,35 @@ export class BiddingComponent implements OnInit {
   isBidBefore = false;
   subscription!: Subscription;
   bidExpire: any;
+
+  options = { prefix: '' ,thousands: ',', decimal: '.', allowZero: true,
+  inputMode: CurrencyMaskInputMode.FINANCIAL, nullable: true, precision: 2 };
+
+  public dateNow = new Date();
+  public dDay = new Date();
+  milliSecondsInASecond = 1000;
+  hoursInADay = 24;
+  minutesInAnHour = 60;
+  SecondsInAMinute  = 60;
+
+  public timeDifference:any;
+  public secondsToDday:any;
+  public minutesToDday:any;
+  public hoursToDday:any;
+  public daysToDday:any;
+
+
+  private getTimeDifference () {
+      this.timeDifference = this.dDay.getTime() - new  Date().getTime();
+      this.allocateTimeUnits(this.timeDifference);
+  }
+
+  private allocateTimeUnits (timeDifference:any) {
+        this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
+        this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
+        this.hoursToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute) % this.hoursInADay);
+        this.daysToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay));
+  }
 
   public biddingForm: FormGroup = new FormGroup({
     value: new FormControl(),
@@ -118,11 +148,18 @@ export class BiddingComponent implements OnInit {
         this.kelipatan = isi.initialPrice * 0.01;
         this.hargaAwal = isi.initialPrice;
         this.bidExpire = isi.bidExpire;
+        this.dDay = new Date(isi.bidExpire);
+        this.subscription = interval(1000)
+           .subscribe(x => { this.getTimeDifference(); });
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getUserData() {
@@ -200,27 +237,4 @@ export class BiddingComponent implements OnInit {
       value: this.highestPrice - this.kelipatan * 10,
     });
   }
-
-  // getHighestPrice() {
-  //   const id = String(this.route.snapshot.paramMap.get('id'));
-  //   this.http
-  //     .get<any>(GET_BIDDING_BY_AOID_API + id, this.httpOptions_base)
-  //     .subscribe(
-  //       (isi) => {
-  //         console.log(isi);
-  //         this.biddingData = isi;
-
-  //         if (this.biddingData.length > 0) {
-  //           this.isBidBefore = true;
-  //           this.highestPrice = isi[0].value;
-  //         } else {
-  //           this.isBidBefore = false;
-  //           this.highestPrice = this.hargaAwal;
-  //         }
-  //       },
-  //       (err) => {
-  //         console.log(err);
-  //       }
-  //     );
-  // }
 }

@@ -7,6 +7,7 @@ import { Province } from 'src/app/_class/province';
 import { AddressService } from 'src/app/_services/address.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { filter } from 'rxjs/operators';
+import { CurrencyMaskInputMode } from 'ngx-currency';
 
 // for faster development
 const GET_ALL_API = 'http://10.1.137.50:8766/getAllUser';
@@ -26,6 +27,9 @@ export class LotLelangComponent implements OnInit {
   totalElements: number = 0;
   pages: number = 0;
   isClicked = [];
+
+  options = { prefix: '' ,thousands: '.', decimal: ',', allowZero: true,
+  inputMode: CurrencyMaskInputMode.FINANCIAL, nullable: true, precision: 0 };
 
   constructor(
     private http: HttpClient,
