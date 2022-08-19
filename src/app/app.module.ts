@@ -141,6 +141,6 @@ import { MainProfilRiwayatKprComponent } from './components/index-profil/main-pr
     MatStepperModule,
   ],
   providers: [Title],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -6,6 +6,9 @@ import { NpwpService } from '../../_services/npwp.service';
 import { Ktp } from '../index-profil/main-profil-ktp/ktp';
 import { Npwp } from '../index-profil/main-profil-npwp/npwp';
 import { Rekening } from '../index-profil/main-profil-rekening-bank/rekening';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { ProfileService } from '../../_services/profile.service';
+import { User } from '../navbar/user';
 
 @Component({
   selector: 'app-latest-properties',
@@ -22,17 +25,21 @@ export class LatestPropertiesComponent implements OnInit {
   isKtpExist: boolean = false;
   isNpwpExist: boolean = false;
   isRekeningExist: boolean = false;
+  isLoanExist: boolean = false;
+  isIncomeExist: boolean = false;
 
   constructor(
     private token: TokenStorageService,
     private ktp: KtpService,
     private npwp: NpwpService,
-    private rekening: RekeningService
+    private rekening: RekeningService,
+    private profile: ProfileService
   ) { }
 
   ngOnInit(): void {
     if (this.token.getToken()) {
       this.isLoggedIn = true;
+      this.getDataUser();
       this.getKtpData();
       this.getNpwpData();
       this.getRekeningData();
@@ -74,6 +81,23 @@ export class LatestPropertiesComponent implements OnInit {
       }, err => {
         this.isRekeningExist = false;
         console.log(this.isRekeningExist);
+      }
+    );
+  }
+
+  getDataUser() {
+    this.profile.getUserData().subscribe(
+      (isi) => {
+        if(isi.loanAmount != null) {
+          this.isLoanExist = true;
+        }
+        if(isi.income != null) {
+          this.isIncomeExist = true;
+        }
+      },
+      (err) => {
+        console.log('gapapa belum login');
+        console.log(err);
       }
     );
   }

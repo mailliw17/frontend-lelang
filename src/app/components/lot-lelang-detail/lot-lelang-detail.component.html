@@ -21,7 +21,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div id="property-single-carousel" class="swiper">
-              <app-carousel-detail></app-carousel-detail>
+            <app-carousel-detail></app-carousel-detail>
           </div>
           <div class="property-single-carousel-pagination carousel-pagination"></div>
         </div>
@@ -75,12 +75,9 @@
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Lampiran:</strong>
-                      <span><a
-                        href="{{ detailDataAuctionObject.attachment }}"
-                        target="_blank"
-                        ><i class="bi bi-file-earmark-pdf"></i> Klik
-                        disini untuk melihat lampiran</a
-                      ></span>
+                      <span><a href="{{ detailDataAuctionObject.attachment }}" target="_blank"><i
+                            class="bi bi-file-earmark-pdf"></i> Klik
+                          disini untuk melihat lampiran</a></span>
                     </li>
                   </ul>
                 </div>
@@ -95,7 +92,7 @@
                 </div>
               </div>
               <div class="property-description">
-                <p class="description color-text-a">
+                <p class="description color-text-a" style="white-space: pre-line">
                   {{ detailDataAuctionObject.description }}
                 </p>
               </div>
@@ -105,14 +102,13 @@
       </div>
     </div>
 
-        <div class="col-md-12 mt-3 text-center">
-          <div class="col-md-12 mt-3">
-            <button type="submit" class="btn btn-a"
-            routerLink="/lot-lelang/konfirmasi-ikut-lelang/{{
+    <div class="col-md-12 mt-3 text-center">
+      <div class="col-md-12 mt-3">
+        <button type="submit" class="btn btn-a" routerLink="/lot-lelang/konfirmasi-ikut-lelang/{{
               detailDataAuctionObject.id
             }}">Ikut Lelang</button>
-          </div>
-        </div>
+      </div>
+    </div>
   </section>
 </main>
 <!-- End Property Single-->

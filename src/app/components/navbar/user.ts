@@ -8,4 +8,6 @@ export interface User {
     password : string
     scdPassword : string
     status : string
+    loanAmount: string
+    income: number
 }
