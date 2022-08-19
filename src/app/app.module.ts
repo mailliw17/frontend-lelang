@@ -67,6 +67,7 @@ import { MainProfilPelunasanLelangComponent } from './components/index-profil/ma
 import { FormKprTambahComponent } from './components/form-kpr-tambah/form-kpr-tambah.component';
 import { FormKprSuksesComponent } from './components/form-kpr-sukses/form-kpr-sukses.component';
 import { MainProfilRiwayatKprComponent } from './components/index-profil/main-profil-riwayat-kpr/main-profil-riwayat-kpr.component';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   declarations: [
@@ -139,6 +140,7 @@ import { MainProfilRiwayatKprComponent } from './components/index-profil/main-pr
     DataTablesModule,
     AlertModule,
     MatStepperModule,
+    NgxCurrencyModule
   ],
   providers: [Title],
   bootstrap: [AppComponent]
