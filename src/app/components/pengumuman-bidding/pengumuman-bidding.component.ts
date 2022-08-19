@@ -7,7 +7,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
 const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
-const CREATE_VA_API = 'http://10.1.137.50:8772/create';
+const CREATE_VA_API = 'http://10.1.137.50:8772/create?category=pelunasan';
 
 @Component({
   selector: 'app-pengumuman-bidding',

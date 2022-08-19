@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 
+import { MatStepperModule } from '@angular/material/stepper';
 import { IconModule } from '@coreui/icons-angular';
 import { AlertModule, CarouselModule } from '@coreui/angular';
 import { BadgeModule } from '@coreui/angular';
@@ -63,6 +64,9 @@ import { CarouselDetailComponent } from './components/carousel-detail/carousel-d
 import { DataTablesModule } from 'angular-datatables';
 import { KonfirmasiPembayaranJaminanComponent } from './components/konfirmasi-pembayaran-jaminan/konfirmasi-pembayaran-jaminan.component';
 import { MainProfilPelunasanLelangComponent } from './components/index-profil/main-profil-pelunasan-lelang/main-profil-pelunasan-lelang.component';
+import { FormKprTambahComponent } from './components/form-kpr-tambah/form-kpr-tambah.component';
+import { FormKprSuksesComponent } from './components/form-kpr-sukses/form-kpr-sukses.component';
+import { MainProfilRiwayatKprComponent } from './components/index-profil/main-profil-riwayat-kpr/main-profil-riwayat-kpr.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +107,9 @@ import { MainProfilPelunasanLelangComponent } from './components/index-profil/ma
     CarouselDetailComponent,
     KonfirmasiPembayaranJaminanComponent,
     MainProfilPelunasanLelangComponent,
+    FormKprTambahComponent,
+    FormKprSuksesComponent,
+    MainProfilRiwayatKprComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,9 +137,10 @@ import { MainProfilPelunasanLelangComponent } from './components/index-profil/ma
     BadgeModule,
     HttpClientModule,
     DataTablesModule,
-    AlertModule
+    AlertModule,
+    MatStepperModule,
   ],
   providers: [Title],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

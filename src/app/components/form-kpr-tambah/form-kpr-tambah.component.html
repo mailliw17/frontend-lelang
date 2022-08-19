@@ -1,0 +1,1013 @@
+<app-navbar></app-navbar>
+<main class="main-content">
+  <section class="section-services section-t8 mb-3">
+    <div class="container">
+      <!-- <h1 class="text-center mt-2">ISI FORM KPR</h1> -->
+      <!-- <button mat-raised-button (click)="isEditable = !isEditable">
+        {{ !isEditable ? "Enable edit mode" : "Disable edit mode" }}
+      </button> -->
+
+      <mat-stepper labelPosition="bottom" #stepper>
+        <mat-step [stepControl]="screeningDebitur">
+          <form [formGroup]="screeningDebitur">
+            <ng-template matStepLabel> Screening Debitur </ng-template>
+            <h2>Screening Debitur</h2>
+            <hr />
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama Lengkap</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nama_lengkap"
+                required=""
+              />
+            </div>
+
+            <label for="exampleFormControlInput1">Status Pernikahan</label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="spernikahan"
+                formControlName="spernikahan"
+                value="menikah"
+              />
+              <label class="custom-control-label" for="customRadio1"
+                >Menikah</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="spernikahan"
+                formControlName="spernikahan"
+                value="lajang"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Lajang</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="spernikahan"
+                formControlName="spernikahan"
+                value="janda/cerai"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Janda / Cerai</label
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="example-date-input" class="form-control-label"
+                >Tanggal Lahir</label
+              >
+              <input
+                class="form-control"
+                type="date"
+                name="dob"
+                formControlName="dob"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Jenis Pekerjaan</label>
+              <select class="form-control" formControlName="jpekerjaan">
+                <option value="">--SILAHKAN PILIH--</option>
+                <option value="karyawan">Karyawan</option>
+                <option value="wiraswasta">Wiraswasta</option>
+                <option value="profesional">Profesional</option>
+              </select>
+            </div>
+
+            <label for="exampleFormControlInput1"
+              >Apakah Anda Nasabah BCA</label
+            >
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="isNasabah"
+                [(ngModel)]="isNasabah"
+                [value]="true"
+                formControlName="isNasabah"
+              />
+              <label class="custom-control-label" for="customRadio1">Ya</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="isNasabah"
+                [(ngModel)]="isNasabah"
+                [value]="false"
+                formControlName="isNasabah"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Tidak</label
+              >
+            </div>
+
+            <div class="form-group" *ngIf="isNasabah">
+              <label for="exampleFormControlInput1"
+                >Nomor Rekening Pemohon</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="accountNumber"
+                formControlName="accountNumber"
+              />
+            </div>
+
+            <div class="text-end">
+              <!-- <button matStepperPrevious class="btn btn-basic m-1">Back</button> -->
+              <button matStepperNext class="btn btn-primary m-1">Lanjut</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPengajuan">
+          <form [formGroup]="dataPengajuan">
+            <ng-template matStepLabel> Data Pengajuan</ng-template>
+            <h2>Data Pengajuan Kredit</h2>
+            <h3>Fasilitas Pengajuan</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Tujuan Kredit</label>
+              <select class="form-control" formControlName="tkredit">
+                <option value="KPR Rumah Second">KPR Rumah Second</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Harga Properti</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="hargaProp"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Jumlah Pinjaman</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="jumPinjaman"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Suku Bunga</label>
+              <select class="form-control" formControlName="sukuBunga">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="fix1thn">Fixed 1 Tahun</option>
+                <option value="fix2thn">Fixed 2 Tahun</option>
+                <option value="fixjenjang8thn">
+                  Fix Berjenjang Hingga 8 Tahun
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Jangka Waktu Pinjaman (Bulan)</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                formControlName="jangkaWaktu"
+              />
+            </div>
+
+            <hr />
+            <h3>Data Jaminan</h3>
+
+            <div
+              class="alert alert-warning text-center text-white"
+              role="alert"
+            >
+              Untuk tujuan kredit pembelian rumah second, anda wajib mengisi
+              data jaminan rumah lainnya, bukan rumah lelang
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Jenis Jaminan</label>
+              <select class="form-control" formControlName="jenisJaminan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="apartment">Apartemen</option>
+                <option value="rumah">Rumah Tinggal</option>
+                <option value="ruko">Ruko</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Alamat Jaminan</label>
+              <textarea
+                class="form-control"
+                formControlName="alamatJaminan"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select class="form-control" formControlName="province">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <select class="form-control" formControlName="city">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <select class="form-control" formControlName="kecamatan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <select class="form-control" formControlName="kelurahan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <label for="exampleFormControlInput1"
+              >Luas Tanah (m2) / Luas Bangunan (m2)</label
+            >
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="luasTanah"
+                  />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="luasBangunan"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button matStepperNext class="btn btn-primary m-1">Lanjut</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPemohon">
+          <form [formGroup]="dataPemohon">
+            <ng-template matStepLabel>Data Pemohon</ng-template>
+            <h2>Data Pemohon</h2>
+            <h3>Tentang Anda</h3>
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Nama Gadis Ibu Kandung</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="motherName"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Jumlah Tanggungan</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="jumTanggunan"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Pendidikan Terakhir</label>
+              <select class="form-control" formControlName="pendidikanTerakhir">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="SD / SMP / SMA">SD / SMP / SMA</option>
+                <option value="Diploma">Diploma</option>
+                <option value="S1">S1</option>
+                <option value="S2 / S3">S2 / S3</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Telepon Rumah</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="nomorTeleponRumah"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Ponsel</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="phoneNumber"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Alamat Email</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+              />
+            </div>
+
+            <hr />
+
+            <h3>Tempat tinggal Anda saat ini</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Alamat (Tempat Tinggal)</label
+              >
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="alamat"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select class="form-control" formControlName="province">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <select class="form-control" formControlName="city">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <select class="form-control" formControlName="kecamatan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <select class="form-control" formControlName="kelurahan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Status Rumah</label>
+              <select class="form-control" formControlName="statsRumah">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="Milik Sendiri">Milik Sendiri</option>
+                <option value="Keluarga">Keluarga</option>
+                <option value="Kontrak">Kontrak</option>
+              </select>
+            </div>
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button matStepperNext class="btn btn-primary m-1">Lanjut</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPenghasilan">
+          <form [formGroup]="dataPenghasilan">
+            <ng-template matStepLabel>Data Penghasilan</ng-template>
+            <h2>Data Penghasilan</h2>
+            <p>
+              Kami perlu mempelajari lebih jauh mengenai pekerjaan dan arus
+              keuangan Anda sehingga kami dapat mengevaluasi jumlah pinjaman
+              Anda.
+            </p>
+            <hr />
+            <h3>Pekerjaan Pemohon</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama Perusahaan</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="officeName"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Jenis Usaha</label>
+              <select class="form-control" formControlName="jenisUsaha">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="Perkebunan">Perkebunan dan Pertanian</option>
+                <option value="Perbankan">Perbankan</option>
+                <option value="Teknologi">Teknologi</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Unit Kerja</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="unitKerja"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Jabatan</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="jabatan"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Alamat Tempat Kerja</label
+              >
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="officeAddress"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select class="form-control" formControlName="province">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <select class="form-control" formControlName="city">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <select class="form-control" formControlName="kecamatan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <select class="form-control" formControlName="kelurahan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">No Telepon</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="phoneNumberHunting"
+              />
+            </div>
+
+            <label for="exampleFormControlSelect1">Bekerja Sejak</label>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Bulan</label>
+                  <select class="form-control" formControlName="monthFirstWork">
+                    <option>--SILAHKAN PILIH--</option>
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Tahun</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="yearFirstWork"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <h3>Data Keuangan</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Penghasilan Pemohon</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="penghasilan"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Penghasilan Tambahan</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="penghasilanTamb"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Biaya Rumah Tangga</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="biayaRmhtg"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Angsuran Lainnya</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="angsuranLain"
+              />
+            </div>
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button matStepperNext class="btn btn-primary m-1">Lanjut</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataKeluargaTerdekat">
+          <form [formGroup]="dataKeluargaTerdekat">
+            <ng-template matStepLabel>Data Keluarga Terdekat</ng-template>
+            <h2>Data Keluarga Terdekat (Tidak Tinggal Serumah)</h2>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nama</label>
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Telepon Rumah</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="nomorTeleponRumah"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Nomor Ponsel</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="phoneNumber"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1"
+                >Hubungan Dengan Debitur</label
+              >
+              <select class="form-control" formControlName="hubungan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="orangtua">Orang Tua</option>
+                <option value="saudara_lakilaki">Saudara Laki-laki</option>
+                <option value="saudara_perempuan">Saudara Perempuan</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Alamat Tempat Tinggal</label
+              >
+              <textarea
+                class="form-control"
+                formControlName="alamatKeluarga"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kode Pos</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="zipCode"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Provinsi</label>
+              <select class="form-control" formControlName="province">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
+              <select class="form-control" formControlName="city">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kecamatan</label>
+              <select class="form-control" formControlName="kecamatan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kelurahan</label>
+              <select class="form-control" formControlName="kelurahan">
+                <option>--SILAHKAN PILIH--</option>
+                <option value="jawabarat">Jawa Barat</option>
+                <option value="jawatengah">Jawa Tengah</option>
+                <option value="jawatimur">Jawa Timur</option>
+              </select>
+            </div>
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button matStepperNext class="btn btn-primary m-1">Lanjut</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPengajuan">
+          <form [formGroup]="dataPengajuan">
+            <ng-template matStepLabel>Upload Dokument</ng-template>
+            <h2>Upload Dokumen Pendukung</h2>
+            <p>
+              Kami memerlukan seluruh dokumen pada tabel berikut sebagai
+              pemenuhan syarat pengajuan fasilitas Anda.
+            </p>
+            <p>
+              Mohon unggah / upload seluruh dokumen berikut sebagai dukungan
+              pengajuan kredit kepemilikan properti Anda, dengan ketentuan
+              sebagai berikut :
+            </p>
+            <ol>
+              <li>
+                Format file yang dapat di unggah adalah pdf, jpg, jpeg, png
+              </li>
+              <li>
+                Pastikan file yang Anda upload dapat terbaca oleh Kami untuk
+                dianalisa.
+              </li>
+              <li>Maksimal size setiap file : 5 MB</li>
+            </ol>
+
+            <hr />
+
+            <h3>Dokumen Umum</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">KTP Pemohon</label>
+              <input
+                type="file"
+                class="form-control"
+                name="ktp"
+                id="ktp"
+                (change)="onKTPChange($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Kartu Keluarga</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onKKChange($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">NPWP</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onNPWPChange($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Mutasi Tabungan (3 bulan terakhir)</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                (change)="onMutasiChange($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Surat Keterangan Perusahaan</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                (change)="onKeteranganPerusahaanChange($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Slip Gaji Terakhir</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onSlipGajiChange($event)"
+              />
+            </div>
+
+            <hr />
+            <h3>Dokumen Jaminan</h3>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1"
+                >Sertifikat HM/HGB/Strate Title</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                (change)="onHMChange($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Sertifikat IMB</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onIMBChange($event)"
+              />
+            </div>
+
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button matStepperNext class="btn btn-primary m-1">Lanjut</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPengajuan">
+          <form [formGroup]="dataPengajuan">
+            <ng-template matStepLabel>Pernyataan Finansial</ng-template>
+            <h3>Pernyataan Finansial</h3>
+            <p>
+              Pernyataan finansial merupakan data tentang kepemilikan kredit
+              yang telah anda ajukan atau anda telah terima, sebagai
+              pertimbangan kita dalam menerima kredit anda berikutnya.
+            </p>
+            <hr />
+
+            <p class="text-bold">
+              Apakah anda sudah/telah menerima fasilitas pembiayaan properti?
+            </p>
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="pernyataan_finansial"
+              />
+              <label class="custom-control-label" for="customRadio1"
+                >Saya dan/ atau suami/ istri BELUM PERNAH MENERIMA fasilitas
+                pembiayaan Properti dari Bank manapun DAN belum pernah
+                MENGAJUKAN proses permohonan di bank manapun</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="pernyataan_finansial"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Saya dan/ atau suami/ istri TELAH MENERIMA fasilitas pembiayaan
+                Properti baik di BCA maupun di bank selain BCA
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="pernyataan_finansial"
+              />
+              <label class="custom-control-label" for="customRadio2"
+                >Saya dan/ atau suami/ istri DALAM PROSES PENGAJUAN fasilitas
+                pembiayaan Properti baik di BCA maupun di bank selain BCA
+              </label>
+            </div>
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button matStepperNext class="btn btn-primary m-1">Lanjut</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="dataPengajuan">
+          <form [formGroup]="dataPengajuan">
+            <ng-template matStepLabel>Surat Pernyataan </ng-template>
+            <h2>Ringkasan Pengajuan</h2>
+            <p>
+              Mohon lakukan pengecekan kembali sebelum menekan tombol “Ajukan
+              KPR” untuk pengajuan kredit kepemilikan properti Anda secara
+              seksama, informasi yang telah Anda isi akan kami gunakan untuk
+              menindak lanjuti pengajuan Anda
+            </p>
+            <hr />
+            <p>PERNYATAAN</p>
+            <p>
+              Sehubungan dengan data/informasi serta dokumen yang saya berikan
+              tersebut diatas dengan ini saya selaku pemohon kredit menyatakan
+              sebagai berikut:
+            </p>
+            <ol>
+              <li>
+                Bahwa pada tanggal diajukannya formulir ini saya menyatakan
+                bahwa: Saya dan/atau suami/istri BELUM pernah MENERIMA DAN BELUM
+                pernah MENGAJUKAN fasilitas pembiayaan properti baik di BCA
+                maupun bank selain BCA.
+              </li>
+              <li>
+                Dalam hal saya menyampaikan pernyataan yang tidak benar maka
+                sehubungan dengan permohonan ini saya bersedia melaksanakan
+                langkah-langkah yang ditetapkan oleh BCA dalam rangka pemenuhan
+                ketentuan Bank Indonesia mengenai Loan to Value atau Financing
+                to Value.
+              </li>
+              <li>
+                Semua informasi dan dokumen yang saya lampirkan dalam permohonan
+                ini adalah benar dan apabila terdapat perubahan data dalam
+                aplikasi, saya wajib segera memberikan informasi terbaru kepada
+                BCA (Hub: HaloBCA 1500888).
+              </li>
+              <li>
+                Dengan ini saya memberikan kuasa kepada BCA untuk melakukan
+                pemeriksaan terhadap kebenaran data/ informasi serta dokumen
+                yang saya serahkan dari sumber manapun dan dengancara yang
+                dianggap baik dan perlu oleh BCA, termasuk pengecekan terhadap
+                kebenaran rekening ke bank terkait dan membebaskan BCA dari
+                segala tuntutan dari pihak manapun sehubungan pemeriksaan
+                tersebut.
+              </li>
+              <li>
+                Dalam hal permohonan saya disetujui, pinjaman yang akan
+                direalisasikan oleh BCA akan saya gunakan untuk tujuan kredit,
+                bukan untuk membiayai Perseroan Terbatas atau badan usaha
+                lainnya.
+              </li>
+            </ol>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="fcustomCheck1"
+                checked=""
+              />
+              <label class="custom-control-label" for="customCheck1"
+                >Semua informasi dan dokumen yang saya lampirkan dalam
+                permohonan ini adalah benar dan apabila terdapat perubahan data
+                dalam aplikasi, saya wajib segera memberikan informasi terbaru
+                kepada BCA.</label
+              >
+            </div>
+            <div class="text-end">
+              <button matStepperPrevious class="btn btn-basic m-1">
+                Kembali
+              </button>
+              <button (click)="kirimDataKPR()" class="btn btn-primary m-1">
+                Ajukan KPR
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Kembali</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step> -->
+      </mat-stepper>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

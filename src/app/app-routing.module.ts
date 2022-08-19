@@ -14,6 +14,9 @@ import { FaqComponent } from './components/faq/faq.component';
 import { BiddingComponent } from './components/bidding/bidding.component';
 import { PengumumanBiddingComponent } from './components/pengumuman-bidding/pengumuman-bidding.component';
 import { KonfirmasiPembayaranJaminanComponent } from './components/konfirmasi-pembayaran-jaminan/konfirmasi-pembayaran-jaminan.component';
+import { FormKprTambahComponent } from './components/form-kpr-tambah/form-kpr-tambah.component';
+import { FormKprSuksesComponent } from './components/form-kpr-sukses/form-kpr-sukses.component';
+import { MainProfilRiwayatKprComponent } from './components/index-profil/main-profil-riwayat-kpr/main-profil-riwayat-kpr.component';
 
 const routes: Routes = [
   {
@@ -159,6 +162,10 @@ const routes: Routes = [
     }
   },
   {
+    path: 'profil/riwayat-kpr',
+    component: ProfilComponent,
+  },
+  {
     path: 'syarat-dan-ketentuan',
     component: SyaratDanKetentuanComponent,
     data: {
@@ -178,6 +185,14 @@ const routes: Routes = [
     data: {
       title: 'Konfirmasi Pembayaran Jaminan - audiBCA'
     }
+  },
+  {
+    path: 'form-kpr/tambah',
+    component: FormKprTambahComponent,
+  },
+  {
+    path: 'form-kpr/sukses',
+    component: FormKprSuksesComponent,
   },
 ];
 
