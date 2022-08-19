@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { IconModule } from '@coreui/icons-angular';
@@ -140,7 +140,7 @@ import { MainProfilRiwayatKprComponent } from './components/index-profil/main-pr
     AlertModule,
     MatStepperModule,
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
