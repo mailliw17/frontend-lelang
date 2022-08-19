@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   registerUser() {
     this.http.post<any>(REGISTER_API, this.registerForm.value).subscribe(
       (isi) => {
-        alert('Register success and check your email to verified');
+        alert('Register sukses, silahkan cek email anda untuk verifikasi');
         this.registerForm.reset();
         // console.log(isi.id);
         this.verifyEmail(isi.id);

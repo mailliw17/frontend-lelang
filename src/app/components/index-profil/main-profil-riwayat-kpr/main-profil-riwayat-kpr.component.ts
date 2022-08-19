@@ -38,7 +38,7 @@ export class MainProfilRiwayatKprComponent implements OnInit {
       .subscribe(
         (isi) => {
           this.kprData = isi;
-          console.log(isi);
+          console.log(this.kprData);
         },
         (err) => {
           console.log(err);
