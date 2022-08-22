@@ -22,30 +22,27 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     const tok = this.token.getToken();
-    // console.log(tok);
     if (tok) {
-      this.getDataUser();
-      // window.location.reload();
-      // break;
+      this.currentUser = this.token.getUser();
+      this.isLoggedIn = true;
     }
   }
 
-  getDataUser() {
-    this.profile.getUserData().subscribe(
-      (isi) => {
-        // window.location.reload();
-        this.token.saveUser(isi);
-        this.currentUser = this.token.getUser();
-        if (this.currentUser) {
-          this.isLoggedIn = true;
-        }
-      },
-      (err) => {
-        console.log('gapapa belum login');
-        console.log(err);
-      }
-    );
-  }
+  // getDataUser() {
+  //   this.profile.getUserData().subscribe(
+  //     (isi) => {
+  //       this.token.saveUser(isi);
+  //       this.currentUser = this.token.getUser();
+  //       if (this.currentUser) {
+  //         this.isLoggedIn = true;
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log('gapapa belum login');
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 
   logout(): void {
     this.auth.logout().subscribe(

@@ -9,6 +9,10 @@ import { Rekening } from '../index-profil/main-profil-rekening-bank/rekening';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { ProfileService } from '../../_services/profile.service';
 import { User } from '../navbar/user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const REKOMENDASI_PROPERTI_API =
+  'http://10.1.138.138:6969/getAllRecAuctionById/';
 
 @Component({
   selector: 'app-latest-properties',
@@ -26,23 +30,70 @@ export class LatestPropertiesComponent implements OnInit {
   isRekeningExist: boolean = false;
   isLoanExist: boolean = false;
   isIncomeExist: boolean = false;
+  AuctionObjectId: any;
 
   constructor(
     private token: TokenStorageService,
     private ktp: KtpService,
     private npwp: NpwpService,
     private rekening: RekeningService,
-    private profile: ProfileService
+    private profile: ProfileService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     if (this.token.getToken()) {
+      // console.log('sudah login');
+
+      // console.log(this.token.getToken());
+
       this.isLoggedIn = true;
+
+      this.ktp.httpOptions_base = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
+
+      this.npwp.httpOptions_base = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
+
+      this.rekening.httpOptions_base = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
+
+      this.profile.httpOptions_base = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
+
       this.getDataUser();
-      this.getKtpData();
-      this.getNpwpData();
-      this.getRekeningData();
     }
+  }
+
+  getDataUser() {
+    this.profile.getUserData().subscribe(
+      (isi) => {
+        if (isi.loanAmount != null) {
+          this.isLoanExist = true;
+        }
+        if (isi.income != null) {
+          this.isIncomeExist = true;
+        }
+        this.getKtpData();
+        this.getNpwpData();
+        this.getRekeningData();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getKtpData() {
@@ -87,18 +138,14 @@ export class LatestPropertiesComponent implements OnInit {
     );
   }
 
-  getDataUser() {
-    this.profile.getUserData().subscribe(
+  getRekomendasi() {
+    const id_user = this.token.getUser().id;
+    this.http.get(REKOMENDASI_PROPERTI_API + id_user).subscribe(
       (isi) => {
-        if (isi.loanAmount != null) {
-          this.isLoanExist = true;
-        }
-        if (isi.income != null) {
-          this.isIncomeExist = true;
-        }
+        this.AuctionObjectId = isi;
+        console.log(this.AuctionObjectId);
       },
       (err) => {
-        // console.log('gapapa belum login');
         console.log(err);
       }
     );
