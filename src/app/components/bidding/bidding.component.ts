@@ -12,6 +12,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { interval, Observable, Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CurrencyMaskInputMode } from 'ngx-currency';
+import Swal from 'sweetalert2';
 
 const GET_AO_API = 'http://10.1.137.50:8766/get/';
 const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
@@ -89,18 +90,15 @@ export class BiddingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.httpOptions_base = {
+      headers: new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${this.token.getToken()}`
+      ),
+    };
     this.getUserData();
     this.getAOData();
     this.getHighestPrice();
-
-    // var time = new Date();
-    // console.log(
-    //   time.toLocaleString('en-US', {
-    //     hour: 'numeric',
-    //     minute: 'numeric',
-    //     hour12: false,
-    //   })
-    // );
   }
 
   // THIS FUNCTION CALLED EVERY 1 SECOND
@@ -215,26 +213,51 @@ export class BiddingComponent implements OnInit {
   }
 
   increaseBid() {
-    this.biddingForm.patchValue({
-      value: this.highestPrice + this.kelipatan,
-    });
+    console.log(this.biddingForm.get('value')?.value);
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice + this.kelipatan,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value + this.kelipatan,
+      });
+    }
   }
 
   increaseBidX10() {
-    this.biddingForm.patchValue({
-      value: this.highestPrice + this.kelipatan * 10,
-    });
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice + this.kelipatan * 10,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value + this.kelipatan * 10,
+      });
+    }
   }
 
   decreaseBid() {
-    this.biddingForm.patchValue({
-      value: this.highestPrice - this.kelipatan,
-    });
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice - this.kelipatan,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value - this.kelipatan,
+      });
+    }
   }
 
   decreaseBidX10() {
-    this.biddingForm.patchValue({
-      value: this.highestPrice - this.kelipatan * 10,
-    });
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice - this.kelipatan * 10,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value - this.kelipatan * 10,
+      });
+    }
   }
 }

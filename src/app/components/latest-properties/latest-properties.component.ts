@@ -9,6 +9,7 @@ import { Rekening } from '../index-profil/main-profil-rekening-bank/rekening';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { ProfileService } from '../../_services/profile.service';
 import { User } from '../navbar/user';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-latest-properties',
@@ -38,11 +39,30 @@ export class LatestPropertiesComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.token.getToken()) {
+      console.log('sudah login');
+      console.log(this.token.getToken());
       this.isLoggedIn = true;
+      this.ktp.httpOptions_base = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.token.getToken()}`
+        })
+      }
+      this.npwp.httpOptions_base = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.token.getToken()}`
+        })
+      }
+      this.rekening.httpOptions_base = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.token.getToken()}`
+        })
+      }
+      this.profile.httpOptions_base = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.token.getToken()}`
+        })
+      }
       this.getDataUser();
-      this.getKtpData();
-      this.getNpwpData();
-      this.getRekeningData();
     }
   }
 
@@ -94,6 +114,9 @@ export class LatestPropertiesComponent implements OnInit {
         if(isi.income != null) {
           this.isIncomeExist = true;
         }
+        this.getKtpData();
+        this.getNpwpData();
+        this.getRekeningData();
       },
       (err) => {
         console.log('gapapa belum login');

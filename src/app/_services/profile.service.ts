@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../components/navbar/user';
 import { TokenStorageService } from './token-storage.service';
 
-const READ_PROFILE = 'http://10.1.137.50:8760/user/v1';
+const READ_PROFILE = 'http://10.1.137.50:8760/user/v1/';
 const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
 
 @Injectable({

@@ -39,7 +39,7 @@ export class TokenStorageService {
   }
 
   public getUser(): any {
-    return JSON.parse(sessionStorage.getItem(USER_KEY)!) //non-null assetio 
+    return JSON.parse(sessionStorage.getItem(USER_KEY)!) //non-null assetio
   }
 
 }
