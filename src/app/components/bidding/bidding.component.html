@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <div class="container">
   <section class="section-services section-t8">
     <h2>Kirim Penawaran</h2>
@@ -19,18 +20,25 @@
               <td>Rp 4.565.000</td>
             </tr> -->
             <tr>
-              <div class="h5 #808080 text-muted" style="border-bottom: 1px solid #aaa;">
+              <div
+                class="h5 #808080 text-muted"
+                style="border-bottom: 1px solid #aaa"
+              >
                 <span>Waktu Tersisa : </span>
-                <span id="days"> {{daysToDday}} </span>Day(s)
-                <span id="hours"> {{hoursToDday}} </span>Hrs
-                <span id="minutes"> {{minutesToDday}} </span>Min
-                <span id="seconds"> {{secondsToDday}} </span>S
+                <span id="days"> {{ daysToDday }} </span>Day(s)
+                <span id="hours"> {{ hoursToDday }} </span>Hrs
+                <span id="minutes"> {{ minutesToDday }} </span>Min
+                <span id="seconds"> {{ secondsToDday }} </span>S
               </div>
             </tr>
             <tr *ngFor="let bid of biddingData | slice: 0:5">
               <td>
                 Rp {{ bid.value | number: "1.2-2" }}
-                <span class="badge bg-gradient-info" *ngIf="bid?.userId == userData?.id">Anda</span>
+                <span
+                  class="badge bg-gradient-info"
+                  *ngIf="bid?.userId == userData?.id"
+                  >Anda</span
+                >
               </td>
             </tr>
           </tbody>
@@ -38,41 +46,70 @@
       </div>
       <div class="col">
         <form [formGroup]="biddingForm" (ngSubmit)="createBidding()">
-          <label class="sr-only mb-2" for="inlineFormInputGroup">Penawaran Anda</label>
+          <label class="sr-only mb-2" for="inlineFormInputGroup"
+            >Penawaran Anda {{ isNumber(highestPrice) }}</label
+          >
           <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">Rp</div>
             </div>
             <!--KALAU SUDAH PERNAH ADA YANG BIDDING -->
-            <input currencyMask class="form-control" value="{{ highestPrice | number: '1.2-2' }}"
-              formControlName="value" [options]="options" />
+            <input
+              currencyMask
+              class="form-control"
+              value="{{ highestPrice | number: '1.2-2' }}"
+              formControlName="value"
+              [options]="options"
+            />
           </div>
 
           <div class="text-center">
-            <button type="button" class="btn btn-success m-3" (click)="increaseBidX10()">
+            <button
+              type="button"
+              class="btn btn-success m-3"
+              (click)="increaseBidX10()"
+            >
               x10
             </button>
 
             <!-- + BUTTON -->
-            <button type="button" class="btn btn-success btn-lg m-3" (click)="increaseBid()">
+            <button
+              type="button"
+              class="btn btn-success btn-lg m-3"
+              (click)="increaseBid()"
+            >
               +
             </button>
 
             <!-- - BUTTON -->
-            <button type="button" class="btn btn-danger btn-lg m-3" (click)="decreaseBid()">
+            <button
+              type="button"
+              class="btn btn-danger btn-lg m-3"
+              (click)="decreaseBid()"
+            >
               -
             </button>
 
-            <button type="button" class="btn btn-danger m-3" (click)="decreaseBidX10()">
+            <button
+              type="button"
+              class="btn btn-danger m-3"
+              (click)="decreaseBidX10()"
+            >
               x10
             </button>
           </div>
 
           <div class="form-group">
             <label for="exampleInputEmail1" class="mb-2">Password</label>
-            <input type="password" class="form-control" name="password" formControlName="password" />
-            <small id="emailHelp" class="form-text text-muted">Masukan password akun anda setiap melakukan
-              bidding</small>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              formControlName="password"
+            />
+            <small id="emailHelp" class="form-text text-muted"
+              >Masukan password akun anda setiap melakukan bidding</small
+            >
           </div>
 
           <div class="text-center m-3">
@@ -104,7 +141,7 @@
             <th scope="row">Selesai Lelang</th>
             <td class="text-danger">
               {{
-              detailDataAuctionObject.bidExpire | date: "dd-LLLL-yyyy H:mm"
+                detailDataAuctionObject.bidExpire | date: "dd-LLLL-yyyy H:mm"
               }}
             </td>
           </tr>
@@ -119,7 +156,7 @@
             <td>
               Rp
               {{
-              detailDataAuctionObject.initialPrice * 0.01 | number: "1.2-2"
+                detailDataAuctionObject.initialPrice * 0.01 | number: "1.2-2"
               }}
             </td>
           </tr>

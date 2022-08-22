@@ -12,6 +12,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { interval, Observable, Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CurrencyMaskInputMode } from 'ngx-currency';
+import Swal from 'sweetalert2';
 
 const GET_AO_API = 'http://10.1.137.50:8766/get/';
 const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
@@ -35,33 +36,56 @@ export class BiddingComponent implements OnInit {
   subscription!: Subscription;
   bidExpire: any;
 
-  options = { prefix: '' ,thousands: ',', decimal: '.', allowZero: true,
-  inputMode: CurrencyMaskInputMode.FINANCIAL, nullable: true, precision: 2 };
+  options = {
+    prefix: '',
+    thousands: ',',
+    decimal: '.',
+    allowZero: true,
+    inputMode: CurrencyMaskInputMode.FINANCIAL,
+    nullable: true,
+    precision: 2,
+  };
 
   public dateNow = new Date();
   public dDay = new Date();
   milliSecondsInASecond = 1000;
   hoursInADay = 24;
   minutesInAnHour = 60;
-  SecondsInAMinute  = 60;
+  SecondsInAMinute = 60;
 
-  public timeDifference:any;
-  public secondsToDday:any;
-  public minutesToDday:any;
-  public hoursToDday:any;
-  public daysToDday:any;
+  public timeDifference: any;
+  public secondsToDday: any;
+  public minutesToDday: any;
+  public hoursToDday: any;
+  public daysToDday: any;
 
-
-  private getTimeDifference () {
-      this.timeDifference = this.dDay.getTime() - new  Date().getTime();
-      this.allocateTimeUnits(this.timeDifference);
+  private getTimeDifference() {
+    this.timeDifference = this.dDay.getTime() - new Date().getTime();
+    this.allocateTimeUnits(this.timeDifference);
   }
 
-  private allocateTimeUnits (timeDifference:any) {
-        this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
-        this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
-        this.hoursToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute) % this.hoursInADay);
-        this.daysToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay));
+  private allocateTimeUnits(timeDifference: any) {
+    this.secondsToDday = Math.floor(
+      (timeDifference / this.milliSecondsInASecond) % this.SecondsInAMinute
+    );
+    this.minutesToDday = Math.floor(
+      (timeDifference / (this.milliSecondsInASecond * this.minutesInAnHour)) %
+        this.SecondsInAMinute
+    );
+    this.hoursToDday = Math.floor(
+      (timeDifference /
+        (this.milliSecondsInASecond *
+          this.minutesInAnHour *
+          this.SecondsInAMinute)) %
+        this.hoursInADay
+    );
+    this.daysToDday = Math.floor(
+      timeDifference /
+        (this.milliSecondsInASecond *
+          this.minutesInAnHour *
+          this.SecondsInAMinute *
+          this.hoursInADay)
+    );
   }
 
   public biddingForm: FormGroup = new FormGroup({
@@ -89,18 +113,30 @@ export class BiddingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getHighestPrice();
     this.getUserData();
     this.getAOData();
-    this.getHighestPrice();
 
-    // var time = new Date();
-    // console.log(
-    //   time.toLocaleString('en-US', {
-    //     hour: 'numeric',
-    //     minute: 'numeric',
-    //     hour12: false,
-    //   })
-    // );
+    let timerInterval: any;
+    Swal.fire({
+      title: 'Loading....',
+      html: 'Kami sedang menyiapkan sistem live bidding',
+      timer: 7000,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+        timerInterval = setInterval(() => {}, 1000);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer');
+      }
+    });
   }
 
   // THIS FUNCTION CALLED EVERY 1 SECOND
@@ -149,8 +185,9 @@ export class BiddingComponent implements OnInit {
         this.hargaAwal = isi.initialPrice;
         this.bidExpire = isi.bidExpire;
         this.dDay = new Date(isi.bidExpire);
-        this.subscription = interval(1000)
-           .subscribe(x => { this.getTimeDifference(); });
+        this.subscription = interval(1000).subscribe((x) => {
+          this.getTimeDifference();
+        });
       },
       (err) => {
         console.log(err);
@@ -216,25 +253,30 @@ export class BiddingComponent implements OnInit {
 
   increaseBid() {
     this.biddingForm.patchValue({
-      value: this.highestPrice + this.kelipatan,
+      value: this.biddingForm.get('value')?.value + this.kelipatan,
     });
+    console.log(this.biddingForm);
   }
 
   increaseBidX10() {
     this.biddingForm.patchValue({
-      value: this.highestPrice + this.kelipatan * 10,
+      value: this.biddingForm.get('value')?.value + this.kelipatan * 10,
     });
   }
 
   decreaseBid() {
     this.biddingForm.patchValue({
-      value: this.highestPrice - this.kelipatan,
+      value: this.biddingForm.get('value')?.value - this.kelipatan,
     });
   }
 
   decreaseBidX10() {
     this.biddingForm.patchValue({
-      value: this.highestPrice - this.kelipatan * 10,
+      value: this.biddingForm.get('value')?.value - this.kelipatan * 10,
     });
+  }
+
+  isNumber(value: any) {
+    return Number.isNaN(value);
   }
 }

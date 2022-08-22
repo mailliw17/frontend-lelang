@@ -6,6 +6,7 @@ import { IconModule } from '@coreui/icons-angular';
 import { AlertModule, CarouselModule } from '@coreui/angular';
 import { BadgeModule } from '@coreui/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -140,9 +141,10 @@ import { NgxCurrencyModule } from 'ngx-currency';
     DataTablesModule,
     AlertModule,
     MatStepperModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    MatProgressSpinnerModule,
   ],
   providers: [Title],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

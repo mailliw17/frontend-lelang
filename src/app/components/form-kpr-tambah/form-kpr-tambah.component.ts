@@ -17,8 +17,8 @@ export class FormKprTambahComponent implements OnInit {
   dataAllKpr: any = {};
   fileForm!: FormGroup;
   fileSrc: any;
-  KTP: any = {};
-  KK: any = {};
+  KTP!: File;
+  KK!: File;
   NPWP: any = {};
   MUTASI: any = {};
   KETPER: any = {};
@@ -26,6 +26,7 @@ export class FormKprTambahComponent implements OnInit {
   HM: any = {};
   IMB: any = {};
   debitur_id: any = {};
+  disabledButton = false;
 
   // token for get anything data
   httpOptions_base = {
@@ -111,6 +112,25 @@ export class FormKprTambahComponent implements OnInit {
     zipCode: ['', Validators.required],
   });
 
+  dataPernyataanFinasial = this._formBuilder.group({
+    pernyataan_finansial: ['', Validators.required],
+  });
+
+  dataUploadDokumen = this._formBuilder.group({
+    ktp: ['', Validators.required],
+    kk: ['', Validators.required],
+    npwp: ['', Validators.required],
+    mutasi: ['', Validators.required],
+    ketper: ['', Validators.required],
+    slipgaji: ['', Validators.required],
+    hm: ['', Validators.required],
+    imb: ['', Validators.required],
+  });
+
+  dataSuratPernyataan = this._formBuilder.group({
+    ceklis_akhir: [''],
+  });
+
   constructor(
     private _formBuilder: FormBuilder,
     private http: HttpClient,
@@ -123,6 +143,10 @@ export class FormKprTambahComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  markAllAsTouched(jenis_form_group: FormGroup) {
+    jenis_form_group.markAllAsTouched();
+  }
 
   onKTPChange(event: any) {
     if (event.target.files.length === 1) {
@@ -179,6 +203,7 @@ export class FormKprTambahComponent implements OnInit {
       .subscribe(
         (isi) => {
           this.submitFile(isi.debitur.id);
+
           alert('Sukses Mengajukan KPR');
           this.router.navigate(['form-kpr/sukses']);
         },
@@ -189,35 +214,35 @@ export class FormKprTambahComponent implements OnInit {
   }
 
   submitFile(id: any) {
-    console.log(this.KTP);
-    console.log(this.KK);
+    // console.log(this.KTP);
+    // console.log(this.KK);
     // console.log(this.NPWP);
     // console.log(this.MUTASI);
     // console.log(this.KETPER);
     // console.log(this.SLIPGAJI);
     // console.log(this.HM);
     // console.log(this.IMB);
-    var formData: any = new FormData();
+    var formData = new FormData();
 
     formData.append('ktp', this.KTP);
     formData.append('kk', this.KK);
-    // formData.append('npwp', this.NPWP);
-    // formData.append('mutasi', this.MUTASI);
-    // formData.append('sk_perusahaan', this.KETPER);
-    // formData.append('last_slip_gaji', this.SLIPGAJI);
-    // formData.append('coll_certificate', this.HM);
-    // formData.append('imb_certificate', this.IMB);
+    formData.append('npwp', this.NPWP);
+    formData.append('mutasi', this.MUTASI);
+    formData.append('sk_perusahaan', this.KETPER);
+    formData.append('last_slip_gaji', this.SLIPGAJI);
+    formData.append('coll_certificate', this.HM);
+    formData.append('imb_certificate', this.IMB);
 
     this.http
       .post<any>(STORE_BERKAS_API + id, formData, this.httpOptions_base)
       .subscribe(
         (isi) => {
           alert('Berkas ok');
-          // this.router.navigate(['form-kpr/sukses']);
+          // console.log(isi);
         },
         (err) => {
           alert('Berkas error');
-          console.log(err.error.message);
+          console.log(err);
         }
       );
   }
