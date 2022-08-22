@@ -113,30 +113,15 @@ export class BiddingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getHighestPrice();
+    this.httpOptions_base = {
+      headers: new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${this.token.getToken()}`
+      ),
+    };
     this.getUserData();
     this.getAOData();
-
-    let timerInterval: any;
-    Swal.fire({
-      title: 'Loading....',
-      html: 'Kami sedang menyiapkan sistem live bidding',
-      timer: 7000,
-      timerProgressBar: true,
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-        timerInterval = setInterval(() => {}, 1000);
-      },
-      willClose: () => {
-        clearInterval(timerInterval);
-      },
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer');
-      }
-    });
+    this.getHighestPrice();
   }
 
   // THIS FUNCTION CALLED EVERY 1 SECOND
@@ -252,28 +237,52 @@ export class BiddingComponent implements OnInit {
   }
 
   increaseBid() {
-    this.biddingForm.patchValue({
-      value: this.biddingForm.get('value')?.value + this.kelipatan,
-    });
-    console.log(this.biddingForm);
+    console.log(this.biddingForm.get('value')?.value);
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice + this.kelipatan,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value + this.kelipatan,
+      });
+    }
   }
 
   increaseBidX10() {
-    this.biddingForm.patchValue({
-      value: this.biddingForm.get('value')?.value + this.kelipatan * 10,
-    });
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice + this.kelipatan * 10,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value + this.kelipatan * 10,
+      });
+    }
   }
 
   decreaseBid() {
-    this.biddingForm.patchValue({
-      value: this.biddingForm.get('value')?.value - this.kelipatan,
-    });
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice - this.kelipatan,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value - this.kelipatan,
+      });
+    }
   }
 
   decreaseBidX10() {
-    this.biddingForm.patchValue({
-      value: this.biddingForm.get('value')?.value - this.kelipatan * 10,
-    });
+    if(this.biddingForm.get('value')?.value === undefined) {
+      this.biddingForm.patchValue({
+        value: this.highestPrice - this.kelipatan * 10,
+      });
+    } else {
+      this.biddingForm.patchValue({
+        value: this.biddingForm.get('value')?.value - this.kelipatan * 10,
+      });
+    }
   }
 
   isNumber(value: any) {

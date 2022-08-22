@@ -17,16 +17,8 @@
               <div class="card-status-box-ico">
                 <h2>KTP</h2>
                 <div *ngIf="isKtpExist">
-                  <span
-                    class="bi bi-check-circle"
-                    style="color: green"
-                    *ngIf="ktpData.isApproved"
-                  ></span>
-                  <span
-                    class="bi bi-x-circle"
-                    style="color: red"
-                    *ngIf="!ktpData.isApproved"
-                  ></span>
+                  <span class="bi bi-check-circle" style="color: green" *ngIf="ktpData.isApproved"></span>
+                  <span class="bi bi-x-circle" style="color: red" *ngIf="!ktpData.isApproved"></span>
                 </div>
                 <div *ngIf="!isKtpExist">
                   <span class="bi bi-x-circle" style="color: red"></span>
@@ -41,16 +33,8 @@
               <div class="card-status-box-ico">
                 <h2>NPWP</h2>
                 <div *ngIf="isNpwpExist">
-                  <span
-                    class="bi bi-check-circle"
-                    style="color: green"
-                    *ngIf="npwpData.isApproved"
-                  ></span>
-                  <span
-                    class="bi bi-x-circle"
-                    style="color: red"
-                    *ngIf="!npwpData.isApproved"
-                  ></span>
+                  <span class="bi bi-check-circle" style="color: green" *ngIf="npwpData.isApproved"></span>
+                  <span class="bi bi-x-circle" style="color: red" *ngIf="!npwpData.isApproved"></span>
                 </div>
                 <div *ngIf="!isNpwpExist">
                   <span class="bi bi-x-circle" style="color: red"></span>
@@ -64,16 +48,8 @@
             <div class="card-header-c d-flex">
               <div class="card-status-box-ico">
                 <h2>Rekening</h2>
-                <span
-                  class="bi bi-check-circle"
-                  style="color: green"
-                  *ngIf="isRekeningExist"
-                ></span>
-                <span
-                  class="bi bi-x-circle"
-                  style="color: red"
-                  *ngIf="!isRekeningExist"
-                ></span>
+                <span class="bi bi-check-circle" style="color: green" *ngIf="isRekeningExist"></span>
+                <span class="bi bi-x-circle" style="color: red" *ngIf="!isRekeningExist"></span>
               </div>
             </div>
           </div>
@@ -83,16 +59,8 @@
             <div class="card-header-c d-flex">
               <div class="card-status-box-ico">
                 <h2>Profil</h2>
-                <span
-                  class="bi bi-check-circle"
-                  style="color: green"
-                  *ngIf="isIncomeExist && isLoanExist"
-                ></span>
-                <span
-                  class="bi bi-x-circle"
-                  style="color: red"
-                  *ngIf="!isIncomeExist || !isLoanExist"
-                ></span>
+                <span class="bi bi-check-circle" style="color: green" *ngIf="isIncomeExist && isLoanExist"></span>
+                <span class="bi bi-x-circle" style="color: red" *ngIf="!isIncomeExist || !isLoanExist"></span>
               </div>
             </div>
           </div>
@@ -110,8 +78,7 @@
               <h2 class="title-a">Rekomendasi untukmu</h2>
             </div>
             <div class="title-link">
-              <a routerLink="/lot-lelang"
-                >All Properties
+              <a routerLink="/lot-lelang">All Properties
                 <span class="bi bi-chevron-right"></span>
               </a>
             </div>
@@ -122,19 +89,13 @@
         <div class="col-md-4">
           <div class="card-box-d">
             <div class="card-img-d">
-              <img
-                src="assets/img/property-6.jpg"
-                alt=""
-                class="img-d img-fluid"
-              />
+              <img src="assets/img/property-6.jpg" alt="" class="img-d img-fluid" />
             </div>
             <div class="card-overlay card-overlay-hover">
               <div class="card-header-d">
                 <div class="card-title-d align-self-center">
                   <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two"
-                      >Tanah + Bangunan</a
-                    >
+                    <a href="agent-single.html" class="link-two">Tanah + Bangunan</a>
                   </h3>
                 </div>
               </div>
@@ -155,20 +116,14 @@
         <div class="col-md-4">
           <div class="card-box-d">
             <div class="card-img-d">
-              <img
-                src="assets/img/property-3.jpg"
-                alt=""
-                class="img-d img-fluid"
-              />
+              <img src="assets/img/property-3.jpg" alt="" class="img-d img-fluid" />
             </div>
             <div class="card-overlay card-overlay-hover">
               <div class="card-header-d">
                 <div class="card-title-d align-self-center">
                   <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two"
-                      >Stiven Spilver <br />
-                      Darw</a
-                    >
+                    <a href="agent-single.html" class="link-two">Stiven Spilver <br />
+                      Darw</a>
                   </h3>
                 </div>
               </div>
@@ -214,20 +169,14 @@
         <div class="col-md-4">
           <div class="card-box-d">
             <div class="card-img-d">
-              <img
-                src="assets/img/property-7.jpg"
-                alt=""
-                class="img-d img-fluid"
-              />
+              <img src="assets/img/property-7.jpg" alt="" class="img-d img-fluid" />
             </div>
             <div class="card-overlay card-overlay-hover">
               <div class="card-header-d">
                 <div class="card-title-d align-self-center">
                   <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two"
-                      >Emma Toledo <br />
-                      Cascada</a
-                    >
+                    <a href="agent-single.html" class="link-two">Emma Toledo <br />
+                      Cascada</a>
                   </h3>
                 </div>
               </div>

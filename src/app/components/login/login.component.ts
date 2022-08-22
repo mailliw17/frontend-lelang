@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
+import Swal from 'sweetalert2';
 import { NavbarComponent } from '../navbar/navbar.component';
 import Swal from 'sweetalert2';
 
@@ -36,6 +37,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  httpOptions_base = {
+    headers: new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${this.token.getToken()}`
+    ),
+  };
+
+
   onSubmit(): void {
     this.authService.login(this.form).subscribe(
       (data) => {
@@ -54,7 +63,6 @@ export class LoginComponent implements OnInit {
             `Bearer ${this.token.getToken()}`
           ),
         };
-
         this.routingUserByRole();
       },
       (err) => {

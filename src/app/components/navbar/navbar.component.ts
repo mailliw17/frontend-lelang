@@ -28,22 +28,6 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // getDataUser() {
-  //   this.profile.getUserData().subscribe(
-  //     (isi) => {
-  //       this.token.saveUser(isi);
-  //       this.currentUser = this.token.getUser();
-  //       if (this.currentUser) {
-  //         this.isLoggedIn = true;
-  //       }
-  //     },
-  //     (err) => {
-  //       console.log('gapapa belum login');
-  //       console.log(err);
-  //     }
-  //   );
-  // }
-
   logout(): void {
     this.auth.logout().subscribe(
       (isi) => {
