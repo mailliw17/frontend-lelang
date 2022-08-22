@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import Swal from 'sweetalert2';
 import { NavbarComponent } from '../navbar/navbar.component';
+import Swal from 'sweetalert2';
 
 const GET_PROFILE = 'http://10.1.137.50:8760/user/v1/';
 
@@ -20,8 +21,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   userData: any;
   currentUser: any;
+  httpOptions_base: any;
 
-  // token for get anything data
   constructor(
     private authService: AuthService,
     private token: TokenStorageService,
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.token.getToken()) {
       this.isLoggedIn = true;
-      this.router.navigate(['/home']);
+      // this.router.navigate(['/home']);
     }
   }
 
@@ -52,14 +53,16 @@ export class LoginComponent implements OnInit {
         this.token.saveRefreshToken(data.refresh_token);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
+        // this.router.navigate(['/home']);
 
+        // token for get anything data
+        // set this variable when user submit the login form
         this.httpOptions_base = {
           headers: new HttpHeaders().set(
             'Authorization',
             `Bearer ${this.token.getToken()}`
           ),
         };
-
         this.routingUserByRole();
       },
       (err) => {
@@ -76,10 +79,9 @@ export class LoginComponent implements OnInit {
   routingUserByRole(): any {
     this.http.get(GET_PROFILE, this.httpOptions_base).subscribe(
       (isi) => {
-        // console.log(oke);
-        // console.log(this.currentUser.role[0])
         this.token.saveUser(isi);
         this.currentUser = this.token.getUser();
+        // console.log('oke');
 
         if (this.currentUser.role[0] == 'admin') {
           this.authService.logout();
@@ -89,10 +91,10 @@ export class LoginComponent implements OnInit {
             title: 'Oops...',
             text: 'Anda tidak memiliki akses!',
             icon: 'error',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
           }).then(() => {
             this.reloadPage();
-          })
+          });
         } else if (this.currentUser.role[0] == 'operator') {
           this.authService.logout();
           this.token.signOut();
@@ -101,16 +103,17 @@ export class LoginComponent implements OnInit {
             title: 'Oops...',
             text: 'Anda tidak memiliki akses!',
             icon: 'error',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
           }).then(() => {
             this.reloadPage();
-          })
+          });
         } else if (this.currentUser.role[0] == 'user') {
           this.router.navigate(['/home']);
         }
       },
       (err) => {
-        console.log('Error when routing');
+        console.log(err);
+        // console.log('Error when routing');
       }
     );
   }

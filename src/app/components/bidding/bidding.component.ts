@@ -36,33 +36,56 @@ export class BiddingComponent implements OnInit {
   subscription!: Subscription;
   bidExpire: any;
 
-  options = { prefix: '' ,thousands: ',', decimal: '.', allowZero: true,
-  inputMode: CurrencyMaskInputMode.FINANCIAL, nullable: true, precision: 2 };
+  options = {
+    prefix: '',
+    thousands: ',',
+    decimal: '.',
+    allowZero: true,
+    inputMode: CurrencyMaskInputMode.FINANCIAL,
+    nullable: true,
+    precision: 2,
+  };
 
   public dateNow = new Date();
   public dDay = new Date();
   milliSecondsInASecond = 1000;
   hoursInADay = 24;
   minutesInAnHour = 60;
-  SecondsInAMinute  = 60;
+  SecondsInAMinute = 60;
 
-  public timeDifference:any;
-  public secondsToDday:any;
-  public minutesToDday:any;
-  public hoursToDday:any;
-  public daysToDday:any;
+  public timeDifference: any;
+  public secondsToDday: any;
+  public minutesToDday: any;
+  public hoursToDday: any;
+  public daysToDday: any;
 
-
-  private getTimeDifference () {
-      this.timeDifference = this.dDay.getTime() - new  Date().getTime();
-      this.allocateTimeUnits(this.timeDifference);
+  private getTimeDifference() {
+    this.timeDifference = this.dDay.getTime() - new Date().getTime();
+    this.allocateTimeUnits(this.timeDifference);
   }
 
-  private allocateTimeUnits (timeDifference:any) {
-        this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
-        this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
-        this.hoursToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute) % this.hoursInADay);
-        this.daysToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay));
+  private allocateTimeUnits(timeDifference: any) {
+    this.secondsToDday = Math.floor(
+      (timeDifference / this.milliSecondsInASecond) % this.SecondsInAMinute
+    );
+    this.minutesToDday = Math.floor(
+      (timeDifference / (this.milliSecondsInASecond * this.minutesInAnHour)) %
+        this.SecondsInAMinute
+    );
+    this.hoursToDday = Math.floor(
+      (timeDifference /
+        (this.milliSecondsInASecond *
+          this.minutesInAnHour *
+          this.SecondsInAMinute)) %
+        this.hoursInADay
+    );
+    this.daysToDday = Math.floor(
+      timeDifference /
+        (this.milliSecondsInASecond *
+          this.minutesInAnHour *
+          this.SecondsInAMinute *
+          this.hoursInADay)
+    );
   }
 
   public biddingForm: FormGroup = new FormGroup({
@@ -147,8 +170,9 @@ export class BiddingComponent implements OnInit {
         this.hargaAwal = isi.initialPrice;
         this.bidExpire = isi.bidExpire;
         this.dDay = new Date(isi.bidExpire);
-        this.subscription = interval(1000)
-           .subscribe(x => { this.getTimeDifference(); });
+        this.subscription = interval(1000).subscribe((x) => {
+          this.getTimeDifference();
+        });
       },
       (err) => {
         console.log(err);
@@ -259,5 +283,9 @@ export class BiddingComponent implements OnInit {
         value: this.biddingForm.get('value')?.value - this.kelipatan * 10,
       });
     }
+  }
+
+  isNumber(value: any) {
+    return Number.isNaN(value);
   }
 }
