@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import Swal from 'sweetalert2';
 import { NavbarComponent } from '../navbar/navbar.component';
-import Swal from 'sweetalert2';
 
 const GET_PROFILE = 'http://10.1.137.50:8760/user/v1/';
 
@@ -36,14 +35,6 @@ export class LoginComponent implements OnInit {
       // this.router.navigate(['/home']);
     }
   }
-
-  httpOptions_base = {
-    headers: new HttpHeaders().set(
-      'Authorization',
-      `Bearer ${this.token.getToken()}`
-    ),
-  };
-
 
   onSubmit(): void {
     this.authService.login(this.form).subscribe(

@@ -43,29 +43,29 @@ export class LatestPropertiesComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.token.getToken()) {
-      console.log('sudah login');
-      console.log(this.token.getToken());
+      // console.log('sudah login');
+      // console.log(this.token.getToken());
       this.isLoggedIn = true;
       this.ktp.httpOptions_base = {
         headers: new HttpHeaders({
-          'Authorization': `Bearer ${this.token.getToken()}`
-        })
-      }
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
       this.npwp.httpOptions_base = {
         headers: new HttpHeaders({
-          'Authorization': `Bearer ${this.token.getToken()}`
-        })
-      }
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
       this.rekening.httpOptions_base = {
         headers: new HttpHeaders({
-          'Authorization': `Bearer ${this.token.getToken()}`
-        })
-      }
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
       this.profile.httpOptions_base = {
         headers: new HttpHeaders({
-          'Authorization': `Bearer ${this.token.getToken()}`
-        })
-      }
+          Authorization: `Bearer ${this.token.getToken()}`,
+        }),
+      };
       this.getDataUser();
     }
   }
