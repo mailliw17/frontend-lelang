@@ -2,12 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { ProfileService } from 'src/app/_services/profile.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const GET_BIDDING_BY_AOID_API = 'http://10.1.137.50:8768/getByAuctionObj/';
 const GET_DETAIL_API = 'http://10.1.137.50:8766/get/';
 const CREATE_VA_API = 'http://10.1.137.50:8772/create?category=pelunasan';
+const CAN_USER_KRP_API = 'http://10.1.138.138:1111/CreditScoreByKTP/';
+const GET_KTP_BY_USERID_API = 'http://10.1.137.50:8761/ktp/user/';
 
 @Component({
   selector: 'app-pengumuman-bidding',
@@ -21,6 +24,12 @@ export class PengumumanBiddingComponent implements OnInit {
   vaForm: any;
   idAuctionObject: any;
   dpAuctionObject: any;
+  idUser: any;
+  nik: any;
+  baru: any;
+  panelOpenState = false;
+  kprForm: any = new FormData();
+  risiko: any;
 
   // token for get anything data
   httpOptions_base = {
@@ -60,16 +69,47 @@ export class PengumumanBiddingComponent implements OnInit {
       );
   }
 
-  getUserData() {
-    this.profile.getUserData().subscribe(
+  async getUserData() {
+    await this.profile.getUserDataSync().then(
       (isi) => {
-        // console.log(isi);
         this.userData = isi;
+        this.idUser = isi.id;
+
+        this.kprForm.append('sex_cd', isi.gender);
+        this.kprForm.append('credit_limit', isi.loanAmount);
+        this.kprForm.append('income', isi.income);
+        this.kprForm.append('dob', isi.dateOb);
+
+        // this.kprForm = {
+        //   sex_cd: isi.gender,
+        //   credit_limit: isi.loanAmount,
+        //   income: isi.income,
+        //   dob: isi.dateOb,
+        // };
+
+        // console.log(this.kprForm);
       },
       (err) => {
         console.log(err);
       }
     );
+
+    await firstValueFrom(
+      this.http.get<any>(
+        GET_KTP_BY_USERID_API + this.idUser,
+        this.httpOptions_base
+      )
+    ).then(
+      (isi) => {
+        this.nik = isi.ktpNo;
+        // console.log(this.nik);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    this.canUserKPR();
   }
 
   getDataAO() {
@@ -106,10 +146,23 @@ export class PengumumanBiddingComponent implements OnInit {
         (err) => {
           console.log(err);
           alert(
-            'Kamu sudah pernah melakukan booking lot lelang ini sebelumnya !'
+            'Kamu sudah pernah melakukan transaksi ini sebelumnya, silahkan bayar !'
           );
-          this.router.navigate(['/status-lelang']);
+          this.router.navigate(['/pelunasan-lelang']);
         }
       );
+  }
+
+  canUserKPR() {
+    // console.log(this.formData);
+    this.http.post<any>(CAN_USER_KRP_API + this.nik, this.kprForm).subscribe(
+      (isi) => {
+        this.risiko = isi.Risk_Level;
+        // console.log(isi);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
