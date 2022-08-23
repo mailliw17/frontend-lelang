@@ -16,26 +16,41 @@
       </div>
 
       <div class="text-center">
-        <a
-          class="btn btn-primary m-1"
-          data-bs-toggle="collapse"
-          href="#collapseExample"
-          role="button"
-          aria-expanded="false"
-          aria-controls="collapseExample"
-        >
-          Virtual Account <i class="bi bi-chevron-down"></i>
-        </a>
-        <button
-          class="btn btn-success m-1"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseExample2"
-          aria-expanded="false"
-          aria-controls="collapseExample"
-        >
-          KPR Rumah Second <i class="bi bi-chevron-down"></i>
-        </button>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-expansion-panel
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> Virtual Account BCA </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>
+                <a (click)="createVirtualAccount()">
+                  <strong>Klik disini</strong> jika anda ingin memilih metode
+                  pembayaran Virtual Account
+                </a>
+              </p>
+            </mat-expansion-panel>
+          </div>
+          <div class="col-md-6">
+            <mat-expansion-panel
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+              *ngIf="risiko == 'LOW'"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> KPR Rumah Second </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>
+                <a routerLink="/form-kpr/tambah">
+                  <strong>Klik disini</strong>
+                  jika anda ingin memilih metode pembayaran KPR Rumah Second</a
+                >
+              </p>
+            </mat-expansion-panel>
+          </div>
+        </div>
       </div>
 
       <div class="collapse text-center mt-2" id="collapseExample">

@@ -2,6 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { City } from 'src/app/_class/city';
+import { Kecamatan } from 'src/app/_class/kecamatan';
+import { Kelurahan } from 'src/app/_class/kelurahan';
+import { Province } from 'src/app/_class/province';
+import { AddressService } from 'src/app/_services/address.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const CREATE_KPR_API = 'http://10.1.137.50:8774/create';
@@ -27,6 +32,26 @@ export class FormKprTambahComponent implements OnInit {
   IMB: any = {};
   debitur_id: any = {};
   disabledButton = false;
+
+  provinceData: Province[] = [];
+  cityData: City[] = [];
+  kecamatanData: Kecamatan[] = [];
+  kelurahanData: Kelurahan[] = [];
+
+  provinceData2: Province[] = [];
+  cityData2: City[] = [];
+  kecamatanData2: Kecamatan[] = [];
+  kelurahanData2: Kelurahan[] = [];
+
+  provinceData3: Province[] = [];
+  cityData3: City[] = [];
+  kecamatanData3: Kecamatan[] = [];
+  kelurahanData3: Kelurahan[] = [];
+
+  provinceData4: Province[] = [];
+  cityData4: City[] = [];
+  kecamatanData4: Kecamatan[] = [];
+  kelurahanData4: Kelurahan[] = [];
 
   // token for get anything data
   httpOptions_base = {
@@ -135,14 +160,131 @@ export class FormKprTambahComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private token: TokenStorageService
+    private token: TokenStorageService,
+    private address: AddressService
   ) {
     this.fileSrc = this._formBuilder.group({
       ktp: [null],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.address.getProvince().subscribe(
+      (isi) => {
+        this.provinceData = isi;
+        this.provinceData2 = isi;
+        this.provinceData3 = isi;
+        this.provinceData4 = isi;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  // CASCADING 1
+  provinceChanged() {
+    this.address
+      .getCity(this.dataPengajuan.value.province!)
+      .subscribe((isi) => {
+        this.cityData = isi;
+      });
+  }
+
+  cityChanged() {
+    this.address
+      .getKecamatan(this.dataPengajuan.value.city!)
+      .subscribe((isi) => {
+        // console.log(isi);
+        this.kecamatanData = isi;
+      });
+  }
+
+  kecamatanChanged() {
+    this.address
+      .getKelurahan(this.dataPengajuan.value.kecamatan!)
+      .subscribe((isi) => {
+        // console.log(isi);
+        this.kelurahanData = isi;
+      });
+  }
+  // EOF CASCADING 1
+
+  // CASCADING 2
+  provinceChanged2() {
+    this.address.getCity(this.dataPemohon.value.province!).subscribe((isi) => {
+      this.cityData2 = isi;
+    });
+  }
+
+  cityChanged2() {
+    this.address.getKecamatan(this.dataPemohon.value.city!).subscribe((isi) => {
+      // console.log(isi);
+      this.kecamatanData2 = isi;
+    });
+  }
+
+  kecamatanChanged2() {
+    this.address
+      .getKelurahan(this.dataPemohon.value.kecamatan!)
+      .subscribe((isi) => {
+        // console.log(isi);
+        this.kelurahanData2 = isi;
+      });
+  }
+  // EOF CASCADING 2
+
+  // CASCADING 3
+  provinceChanged3() {
+    this.address
+      .getCity(this.dataPenghasilan.value.province!)
+      .subscribe((isi) => {
+        this.cityData3 = isi;
+      });
+  }
+
+  cityChanged3() {
+    this.address
+      .getKecamatan(this.dataPenghasilan.value.city!)
+      .subscribe((isi) => {
+        // console.log(isi);
+        this.kecamatanData3 = isi;
+      });
+  }
+
+  kecamatanChanged3() {
+    this.address
+      .getKelurahan(this.dataPenghasilan.value.kecamatan!)
+      .subscribe((isi) => {
+        // console.log(isi);
+        this.kelurahanData3 = isi;
+      });
+  }
+  // EOF CASCADING 3
+
+  // CASCADING 4
+  provinceChanged4() {
+    this.address.getCity(this.dataPemohon.value.province!).subscribe((isi) => {
+      this.cityData4 = isi;
+    });
+  }
+
+  cityChanged4() {
+    this.address.getKecamatan(this.dataPemohon.value.city!).subscribe((isi) => {
+      // console.log(isi);
+      this.kecamatanData4 = isi;
+    });
+  }
+
+  kecamatanChanged4() {
+    this.address
+      .getKelurahan(this.dataPemohon.value.kecamatan!)
+      .subscribe((isi) => {
+        // console.log(isi);
+        this.kelurahanData4 = isi;
+      });
+  }
+  // EOF CASCADING 4
 
   markAllAsTouched(jenis_form_group: FormGroup) {
     jenis_form_group.markAllAsTouched();
@@ -214,14 +356,6 @@ export class FormKprTambahComponent implements OnInit {
   }
 
   submitFile(id: any) {
-    // console.log(this.KTP);
-    // console.log(this.KK);
-    // console.log(this.NPWP);
-    // console.log(this.MUTASI);
-    // console.log(this.KETPER);
-    // console.log(this.SLIPGAJI);
-    // console.log(this.HM);
-    // console.log(this.IMB);
     var formData = new FormData();
 
     formData.append('ktp', this.KTP);

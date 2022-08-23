@@ -143,6 +143,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     MatStepperModule,
     NgxCurrencyModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
   ],
   providers: [Title],
   bootstrap: [AppComponent],

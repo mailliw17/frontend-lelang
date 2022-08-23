@@ -100,8 +100,7 @@ export class KonfirmasiIkutLelangComponent implements OnInit {
       .get<any>(GET_REKENING_DATA_API + user.id, this.httpOptions_base)
       .subscribe(
         (isi) => {
-          // console.log(isi[0]);
-          // pakai index karena dari BE dikasih array bukan lgsg object
+          // PAKAI INDEX KARENA DARI BE DIKASIH ARRAY BUKAN LANGUNSG OBJECT
           this.dataRekening = isi[0];
           // console.log(isi[0]);
         },

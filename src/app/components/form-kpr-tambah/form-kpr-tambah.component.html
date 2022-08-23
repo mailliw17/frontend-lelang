@@ -426,13 +426,21 @@
               </div>
             </div>
 
+            <!-- START CASCADING 1-->
             <div class="form-group">
               <label for="exampleFormControlSelect1">Provinsi</label>
-              <select class="form-control" formControlName="province">
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let province of provinceData"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
               </select>
             </div>
             <div
@@ -453,11 +461,23 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
-              <select class="form-control" formControlName="city">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData.length !== 0"
+                (change)="cityChanged()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option *ngFor="let city of cityData" [value]="city.name">
+                  {{ city.name }}
+                </option>
               </select>
             </div>
             <div
@@ -478,11 +498,27 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kecamatan</label>
-              <select class="form-control" formControlName="kecamatan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData.length !== 0"
+                (change)="kecamatanChanged()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -503,11 +539,25 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kelurahan</label>
-              <select class="form-control" formControlName="kelurahan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData.length !== 0"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -525,6 +575,7 @@
                 Silahkan isi bagian ini
               </div>
             </div>
+            <!-- EOF CASCADING 1-->
 
             <label for="exampleFormControlInput1"
               >Luas Tanah (m2) / Luas Bangunan (m2)</label
@@ -801,13 +852,21 @@
               </div>
             </div>
 
+            <!-- START CASCADING 2-->
             <div class="form-group">
               <label for="exampleFormControlSelect1">Provinsi</label>
-              <select class="form-control" formControlName="province">
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged2()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let province of provinceData2"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
               </select>
             </div>
             <div
@@ -828,11 +887,23 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
-              <select class="form-control" formControlName="city">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData2.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData2.length !== 0"
+                (change)="cityChanged2()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option *ngFor="let city of cityData2" [value]="city.name">
+                  {{ city.name }}
+                </option>
               </select>
             </div>
             <div
@@ -853,11 +924,27 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kecamatan</label>
-              <select class="form-control" formControlName="kecamatan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData2.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData2.length !== 0"
+                (change)="kecamatanChanged2()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData2"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -878,11 +965,25 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kelurahan</label>
-              <select class="form-control" formControlName="kelurahan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData2.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData2.length !== 0"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData2"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -900,6 +1001,7 @@
                 Silahkan isi bagian ini
               </div>
             </div>
+            <!-- EOF CASCADING 2 -->
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Status Rumah</label>
@@ -1102,13 +1204,21 @@
               </div>
             </div>
 
+            <!-- START CASCADING 3-->
             <div class="form-group">
               <label for="exampleFormControlSelect1">Provinsi</label>
-              <select class="form-control" formControlName="province">
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged3()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let province of provinceData3"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1129,11 +1239,23 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
-              <select class="form-control" formControlName="city">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData3.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData3.length !== 0"
+                (change)="cityChanged3()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option *ngFor="let city of cityData3" [value]="city.name">
+                  {{ city.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1154,11 +1276,27 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kecamatan</label>
-              <select class="form-control" formControlName="kecamatan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData3.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData3.length !== 0"
+                (change)="kecamatanChanged3()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData3"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1179,11 +1317,25 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kelurahan</label>
-              <select class="form-control" formControlName="kelurahan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData3.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData3.length !== 0"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData3"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1201,6 +1353,7 @@
                 Silahkan isi bagian ini
               </div>
             </div>
+            <!-- EOF CASCADING 3 -->
 
             <div class="form-group">
               <label for="exampleFormControlInput1">No Telepon (Hunting)</label>
@@ -1582,13 +1735,21 @@
               </div>
             </div>
 
+            <!-- START CASCADING 4-->
             <div class="form-group">
               <label for="exampleFormControlSelect1">Provinsi</label>
-              <select class="form-control" formControlName="province">
+              <select
+                class="form-control"
+                formControlName="province"
+                (change)="provinceChanged4()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let province of provinceData4"
+                  [value]="province.name"
+                >
+                  {{ province.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1600,8 +1761,8 @@
             >
               <div
                 *ngIf="
-        dataKeluargaTerdekat.controls['province'].errors?.['required']
-      "
+                dataKeluargaTerdekat.controls['province'].errors?.['required']
+              "
               >
                 Silahkan isi bagian ini
               </div>
@@ -1609,11 +1770,23 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kota / Kabupaten</label>
-              <select class="form-control" formControlName="city">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih Kota"
+                *ngIf="cityData4.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="city"
+                *ngIf="cityData4.length !== 0"
+                (change)="cityChanged4()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option *ngFor="let city of cityData4" [value]="city.name">
+                  {{ city.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1625,8 +1798,8 @@
             >
               <div
                 *ngIf="
-        dataKeluargaTerdekat.controls['city'].errors?.['required']
-      "
+                dataKeluargaTerdekat.controls['city'].errors?.['required']
+              "
               >
                 Silahkan isi bagian ini
               </div>
@@ -1634,11 +1807,27 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kecamatan</label>
-              <select class="form-control" formControlName="kecamatan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kecamatan"
+                *ngIf="kecamatanData4.length === 0"
+                readonly
+              />
+
+              <select
+                class="form-control"
+                formControlName="kecamatan"
+                *ngIf="kecamatanData4.length !== 0"
+                (change)="kecamatanChanged4()"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kecamatan of kecamatanData4"
+                  [value]="kecamatan.name"
+                >
+                  {{ kecamatan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1650,8 +1839,8 @@
             >
               <div
                 *ngIf="
-        dataKeluargaTerdekat.controls['kecamatan'].errors?.['required']
-      "
+                dataKeluargaTerdekat.controls['kecamatan'].errors?.['required']
+              "
               >
                 Silahkan isi bagian ini
               </div>
@@ -1659,11 +1848,25 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kelurahan</label>
-              <select class="form-control" formControlName="kelurahan">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Pilih kelurahan"
+                *ngIf="kelurahanData4.length === 0"
+                readonly
+              />
+              <select
+                class="form-control"
+                formControlName="kelurahan"
+                *ngIf="kelurahanData4.length !== 0"
+              >
                 <option disabled selected label="--SILAHKAN PILIH--"></option>
-                <option value="jawabarat">Jawa Barat</option>
-                <option value="jawatengah">Jawa Tengah</option>
-                <option value="jawatimur">Jawa Timur</option>
+                <option
+                  *ngFor="let kelurahan of kelurahanData4"
+                  label="{{ kelurahan.name }}"
+                >
+                  {{ kelurahan.name }}
+                </option>
               </select>
             </div>
             <div
@@ -1675,12 +1878,13 @@
             >
               <div
                 *ngIf="
-        dataKeluargaTerdekat.controls['kelurahan'].errors?.['required']
-      "
+                dataKeluargaTerdekat.controls['kelurahan'].errors?.['required']
+              "
               >
                 Silahkan isi bagian ini
               </div>
             </div>
+            <!-- EOF CASCADING 4 -->
 
             <div class="text-end">
               <button matStepperPrevious class="btn btn-basic m-1">

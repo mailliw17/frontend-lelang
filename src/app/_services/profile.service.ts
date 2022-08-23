@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { User } from '../components/navbar/user';
 import { TokenStorageService } from './token-storage.service';
 
@@ -28,6 +28,12 @@ export class ProfileService {
 
   getUserData(): Observable<User> {
     return this.http.get<User>(READ_PROFILE, this.httpOptions_base);
+  }
+
+  getUserDataSync(): Promise<User> {
+    return firstValueFrom(
+      this.http.get<User>(READ_PROFILE, this.httpOptions_base)
+    );
   }
 
   // numpang function dulu ya
