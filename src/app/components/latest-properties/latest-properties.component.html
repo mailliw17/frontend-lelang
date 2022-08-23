@@ -69,7 +69,7 @@
     </div>
   </section>
   <!-- ======= Agents Section ======= -->
-  <section class="section-agents section-t8">
+  <section class="section-agents section-t8" *ngIf="isRecommendationExist">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -86,134 +86,29 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <div class="card-box-d">
-            <div class="card-img-d">
-              <img src="assets/img/property-6.jpg" alt="" class="img-d img-fluid" />
+        <div class="col-md-4" *ngFor="let dao of dataAuctionObject">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{ dao.imageURL1 }}" alt="" class="img-a img-fluid" style="height: 600px" />
             </div>
-            <div class="card-overlay card-overlay-hover">
-              <div class="card-header-d">
-                <div class="card-title-d align-self-center">
-                  <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two">Tanah + Bangunan</a>
-                  </h3>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="#">{{ dao.name }}</a>
+                  </h2>
                 </div>
-              </div>
-              <div class="card-body-d">
-                <p class="content-d color-text-a">
-                  2 bidang tanah berikut bangunan dijual dalam satu paket
-                  terletak di Jalan Jendral Ahmad Yani Kota Medan
-                </p>
-                <div class="info-agents color-a">
-                  <p><strong>Nilai Limit : </strong> Rp 3.407.100.000</p>
-                  <p><strong>Jaminan : </strong> Rp 682.000.000</p>
-                  <p><strong>Batas Akhir Jaminan : </strong> 27 Juli 2022</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-d">
-            <div class="card-img-d">
-              <img src="assets/img/property-3.jpg" alt="" class="img-d img-fluid" />
-            </div>
-            <div class="card-overlay card-overlay-hover">
-              <div class="card-header-d">
-                <div class="card-title-d align-self-center">
-                  <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two">Stiven Spilver <br />
-                      Darw</a>
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body-d">
-                <p class="content-d color-text-a">
-                  Sed porttitor lectus nibh, Cras ultricies ligula sed magna
-                  dictum porta two.
-                </p>
-                <div class="info-agents color-a">
-                  <p><strong>Phone: </strong> +54 356 945234</p>
-                  <p><strong>Email: </strong> agents@example.com</p>
-                </div>
-              </div>
-              <div class="card-footer-d">
-                <div class="socials-footer d-flex justify-content-center">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-linkedin" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-d">
-            <div class="card-img-d">
-              <img src="assets/img/property-7.jpg" alt="" class="img-d img-fluid" />
-            </div>
-            <div class="card-overlay card-overlay-hover">
-              <div class="card-header-d">
-                <div class="card-title-d align-self-center">
-                  <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two">Emma Toledo <br />
-                      Cascada</a>
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body-d">
-                <p class="content-d color-text-a">
-                  Sed porttitor lectus nibh, Cras ultricies ligula sed magna
-                  dictum porta two.
-                </p>
-                <div class="info-agents color-a">
-                  <p><strong>Phone: </strong> +54 356 945234</p>
-                  <p><strong>Email: </strong> agents@example.com</p>
-                </div>
-              </div>
-              <div class="card-footer-d">
-                <div class="socials-footer d-flex justify-content-center">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="bi bi-linkedin" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a" style="font-size: 10pt">
+                      <i class="bi bi-geo-alt"></i>
+                      {{ dao.organizer.name.substr(6) }} | Rp
+                      {{ dao.initialPrice | number: "1.2-2" }}
+                    </span>
+                  </div>
+                  <a routerLink="/lot-lelang/detail/{{ dao.id }}" class="link-a">Detail
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
                 </div>
               </div>
             </div>

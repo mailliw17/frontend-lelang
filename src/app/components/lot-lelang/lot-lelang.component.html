@@ -88,7 +88,7 @@
         <div class="col-md-4" *ngFor="let dao of dataAuctionObject">
           <div class="card-box-a card-shadow">
             <div class="img-box-a">
-              <img src="{{ dao.image }}" alt="" class="img-a img-fluid" style="height: 400px" />
+              <img src="{{ dao.image }}" alt="" class="img-a img-fluid" style="height: 600px" />
             </div>
             <div class="card-overlay">
               <div class="card-overlay-a-content">
@@ -119,8 +119,8 @@
           <nav class="pagination-a">
             <ul class="pagination justify-content-end">
               <li class="page-item">
-                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage - 0 }"
-                  tabindex="-1">
+                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage - 0 }" tabindex="-1"
+                  *ngIf="currPage - 0 == 1">
                   <span class="bi bi-chevron-left"></span>
                 </a>
               </li>
@@ -129,7 +129,8 @@
                 <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: i + 1 }">{{ i + 1 }}</a>
               </li>
               <li class="page-item next">
-                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage + 2 }">
+                <a class="page-link" [routerLink]="['/lot-lelang']" [queryParams]="{ page: currPage + 2 }"
+                  *ngIf="currPage + 2 <= pages">
                   <span class="bi bi-chevron-right"></span>
                 </a>
               </li>
