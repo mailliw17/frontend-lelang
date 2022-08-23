@@ -14,6 +14,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 const REKOMENDASI_PROPERTI_API =
   'http://10.1.138.138:6969/getAllRecAuctionById/';
 
+const GET_AUCTION_BY_ID = 'http://10.1.137.50:8766/get/';
+
 @Component({
   selector: 'app-latest-properties',
   templateUrl: './latest-properties.component.html',
@@ -25,11 +27,13 @@ export class LatestPropertiesComponent implements OnInit {
   ktpData!: Ktp;
   npwpData!: Npwp;
   rekeningData!: Rekening[];
+  dataAuctionObject: any = [];
   isKtpExist: boolean = false;
   isNpwpExist: boolean = false;
   isRekeningExist: boolean = false;
   isLoanExist: boolean = false;
   isIncomeExist: boolean = false;
+  isRecommendationExist: boolean = false;
   AuctionObjectId: any;
 
   constructor(
@@ -38,7 +42,7 @@ export class LatestPropertiesComponent implements OnInit {
     private npwp: NpwpService,
     private rekening: RekeningService,
     private profile: ProfileService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +86,7 @@ export class LatestPropertiesComponent implements OnInit {
         this.getKtpData();
         this.getNpwpData();
         this.getRekeningData();
+        this.getRekomendasi();
       },
       (err) => {
         console.log(err);
@@ -135,8 +140,23 @@ export class LatestPropertiesComponent implements OnInit {
     const id_user = this.token.getUser().id;
     this.http.get(REKOMENDASI_PROPERTI_API + id_user).subscribe(
       (isi) => {
+        var i = 0;
         this.AuctionObjectId = isi;
-        console.log(this.AuctionObjectId);
+        this.isRecommendationExist = true;
+        for(var val of this.AuctionObjectId.AuctionObjectId){
+          console.log(i);
+          if(i >= 3){
+            break;
+          } else {
+            this.http.get(GET_AUCTION_BY_ID + val).subscribe(
+              (isi) => {
+                this.dataAuctionObject.push(isi);
+                console.log(this.dataAuctionObject);
+              }
+            );
+            i = i + 1;
+          }
+        }
       },
       (err) => {
         console.log(err);

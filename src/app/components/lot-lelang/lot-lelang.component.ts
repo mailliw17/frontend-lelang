@@ -88,7 +88,7 @@ export class LotLelangComponent implements OnInit {
         console.log(isi);
         this.dataAuctionObject = isi.content;
         this.totalElements = isi.totalElements;
-        this.pages = Math.ceil(this.totalElements / 8);
+        this.pages = Math.ceil(this.totalElements / 9);
         // console.log(this.dataAuctionObject);
       },
       (err) => {
